@@ -22,7 +22,7 @@ var adapter = soef.Adapter (
     onStateChange,
     onMessage,
     onUnload,
-    { name: 'wifilight' }
+    { name: 'wifilight-community' }
 );
 
 function fromDeviceName(name) {
