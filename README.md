@@ -2,7 +2,7 @@
 
 #### ioBroker.wifilight 
 
-[![NPM version](http://img.shields.io/npm/v/iobroker.wifilight.svg)](https://www.npmjs.com/package/iobroker.wifilight)
+![Number of Installations](http://iobroker.live/badges/wifilight-community-installed.svg) ![Number of Installations](http://iobroker.live/badges/wifilight-community-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.wifilight.svg)](https://www.npmjs.com/package/iobroker.wifilight)
 [![Tests](http://img.shields.io/travis/soef/ioBroker.wifilight/master.svg)](https://travis-ci.org/soef/ioBroker.wifilight)
 [![Build status](https://ci.appveyor.com/api/projects/status/2hvs4fvfms7xhmnw?svg=true)](https://ci.appveyor.com/project/soef/iobroker-wifilight)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/soef/iobroker.wifilight/blob/master/LICENSE)
