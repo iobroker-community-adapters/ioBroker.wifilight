@@ -43,9 +43,18 @@ For example, ``` red = 0 ```, blue and green will stay unchanged.
 + \#rrggbb[ww]
 
 #### Installation
-Execute the following command in the iobroker root directory (e.g. in /opt/iobroker)
+Use the Adapter panel in iobroker to add an instance.
+
+If not exists execute the following command in the iobroker root directory (e.g. in /opt/iobroker).
 ```
 npm install iobroker.wifilight 
+```
+
+#### Error fixing
+In case of not working try to install the soef npm package
+```
+cd /opt/iobroker/node_modules/iobroker.wifilight 
+sudo npm install soef 
 ```
 <!--
 ### License
