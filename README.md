@@ -57,9 +57,9 @@ cd /opt/iobroker/node_modules/iobroker.wifilight
 sudo npm install soef 
 ```
 
-### Changelog
+## Changelog
 
-## 1.0.0 (2019-10-18)
+### 1.0.0 (2019-10-18)
 * (ldittmar) first version for the community
 
 <!--
