@@ -55,13 +55,13 @@ In case of not working try to install the soef npm package
 ```
 cd /opt/iobroker/node_modules/iobroker.wifilight 
 sudo npm install soef 
+```
 
 ### Changelog
 
 ## 1.0.0 (2019-10-18)
 * (ldittmar) first version for the community
 
-```
 <!--
 ### License
 The MIT License (MIT)
