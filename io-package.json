@@ -30,7 +30,16 @@
             "zh-cn": "WiFi Light"
         },
         "desc": {
-            "en": "WiFi Light Devices"
+            "en": "WiFi Light Devices",
+            "de": "WiFi-Licht-Geräte",
+            "ru": "Световые Приборы Беспроводной Доступ В Интернет ",
+            "pt": "Luz Wi-Fi De Dispositivos",
+            "nl": "WiFi-Apparaten Licht",
+            "fr": "WiFi Des Appareils Légers",
+            "it": "WiFi Luce Di Dispositivi",
+            "es": "WiFi De Los Dispositivos De Luz",
+            "pl": "Oświetlenie Bezprzewodowy Dostęp Do Internetu ",
+            "zh-cn": "无线光设备"
         },
         "keywords": [
             "ioBroker",
