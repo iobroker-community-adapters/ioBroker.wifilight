@@ -84,14 +84,14 @@ function onUnload(callback) {
 var cmds = require(__dirname + '/devices');
 
 var usedStateNames = {
-    online:      { n: 'reachable', g:1, val: 0,     common: { write: false, min: false, max: true }},
-    on:          { n: 'on',        g:3, val: false, common: { min: false, max: true }},
-    bri:         { n: 'bri',       g:3, val: 100,   common: { min: 0, max: 100, unit: '%', desc: '0..100%' }},
-    ct:          { n: 'ct',        g:1, val: 0,     common: { min: 0, max: 5000, unit: '°K', desc: 'temperature in °Kelvin 0..5000' }},
-    red:         { n: 'r',         g:3, val: 0,     common: { min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)' }},
-    green:       { n: 'g',         g:3, val: 0,     common: { min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)' }},
-    blue:        { n: 'b',         g:3, val: 0,     common: { min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)' }},
-    white:       { n: 'w',         g:3, val: 0,     common: { min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)' }},
+    online:      { n: 'reachable', g:1, val: 0,     common: { write: false, min: false, max: true, role: "indicator.working"}},
+    on:          { n: 'on',        g:3, val: false, common: { min: false, max: true, role: "switch" }},
+    bri:         { n: 'bri',       g:3, val: 100,   common: { min: 0, max: 100, unit: '%', desc: '0..100%', role: "level.dimmer" }},
+    ct:          { n: 'ct',        g:1, val: 0,     common: { min: 0, max: 5000, unit: '°K', desc: 'temperature in °Kelvin 0..5000', role: "level.color.temperature" }},
+    red:         { n: 'r',         g:3, val: 0,     common: { min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: "level.color.red" }},
+    green:       { n: 'g',         g:3, val: 0,     common: { min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: "level.color.green" }},
+    blue:        { n: 'b',         g:3, val: 0,     common: { min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: "level.color.blue" }},
+    white:       { n: 'w',         g:3, val: 0,     common: { min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: "level.color.white" }},
     disco:       { n: 'disco',     g:2, val: 1,     common: { min: 1, max: 9, desc: '1..9' }},
     progNo:      { n: 'progNo',    g:1, val: 38,    common: { min: 35, max: 56, desc: '37..56, 97=none' }},
     progOn:      { n: 'progOn',    g:1, val: false, common: { min: false, max: true, desc: 'program on/off' }},
@@ -99,7 +99,7 @@ var usedStateNames = {
     refresh:     { n: 'refresh',   g:1, val: false, common: { min: false, max: true, desc: 'read states from device' }},
     transition:  { n: 'trans',     g:1, val: 30,    common: { unit: '\u2152 s', desc: 'in 10th seconds'} },
     command:     { n: 'command',   g:3, val: 'r:0, g:0, b:0, on:true, transition:30', desc: 'r:0, g:0, b:0, on:true, transition:2' },
-    rgb:         { n: 'rgb',       g:3, val: '',    common: { desc: '000000..ffffff' }},
+    rgb:         { n: 'rgb',       g:3, val: '',    common: { desc: '000000..ffffff' }, role: "level.color.rgb"},
     onTime:      { n: 'onTime',    g:3, val: '',    common: {}}
 };
 
