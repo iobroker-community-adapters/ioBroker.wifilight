@@ -1,0 +1,18 @@
+{
+    "AddDevice": "Add #-Button to add device",
+    "Cannot find any device": "Cannot find new devices",
+    "Enable adapter first": "Enable adapter first",
+    "Find a device": "Find a device",
+    "Please wait, looking for devices...": "Please wait...",
+    "Select a device": "Select a device",
+    "Settings": "Settings",
+    "WiFi Light": "WiFi Light",
+    "devices": "Dives list",
+    "ip": "IP",
+    "looking for device": "Looking for devices",
+    "name": "Name",
+    "on save adapter restarts with new config immediately": "on save adapter restarts with new config immediately",
+    "pollIntervall": "Poll Intervall",
+    "port": "Port",
+    "type": "Type"
+}

@@ -1,0 +1,18 @@
+{
+    "AddDevice": "Добавить # -Кнопка для добавления устройства",
+    "Cannot find any device": "Не могу найти новые устройства",
+    "Enable adapter first": "Сначала включите адаптер",
+    "Find a device": "Найти устройство",
+    "Please wait, looking for devices...": "Пожалуйста, подождите...",
+    "Select a device": "Выберите устройство",
+    "Settings": "Settings",
+    "WiFi Light": "Пример",
+    "devices": "Список погружений",
+    "ip": "IP",
+    "looking for device": "Ищем устройства",
+    "name": "имя",
+    "on save adapter restarts with new config immediately": "Сразу после сохранения настроек драйвер перезапуститься с новыми значениями",
+    "pollIntervall": "Опрос Интервал",
+    "port": "порт",
+    "type": "Тип"
+}

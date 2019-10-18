@@ -1,59 +1,36 @@
 {
     "common": {
         "name": "wifilight-community",
-        "version": "0.2.1",
+        "version": "1.0.0",
         "news": {
-
-            "0.2.1": {
-                "en": "required soef module version set to 0.4.15",
-                "de": "Mindest Version des Modules soef auf 0.4.15 erhöht"
-            },
-            "0.2.0": {
-                "en": "device config handling changed",
-                "de": "Handhabung der Gerätekonfiguration geändert"
-            },
-            "0.1.10": {
-                "en": "AK001-ZJ200 added (matze1708)",
-                "de": "AK001-ZJ200 hinzugefügt (matze1708)"
-            },
-            "0.1.9": {
-                "en": "update basic package-file testing (Apollon77)",
-                "de": "Erweiterung der Tests (Apollon77)"
-            },
-            "0.1.8": {
-                "en": "node 0.12 removed from testing",
-                "de": "node 0.12 auf testing entfernt"
-            },
-            "0.1.7": {
-                "en": "Enhance CI testing",
-                "de": "CI testing erweitert"
-            },
-            "0.1.6": {
-                "en": "fixed typo. Caused an object change which caused an adapter restart",
-                "de": "Tippfehler korrigiert. Führte zu einer Object-Änderung die wiederum zum Adapterneustart führte"
-            },
-            "0.1.5": {
-                "en": "Possible exception, if wrong device name configured, fixed. Reason is added to the error log.",
-                "de": "Mögliche Schutzverletzung, wenn falscher Geräte Name/Type angegeben, behoben, Grund steht im error log."
-            },
-            "0.1.4": {
-                "en": "Misplaced komma in io-package.json",
-                "de": "Falsche Komma in io-package.json"
-            },
-            "0.1.3": {
-                "en": "Normalize devices for devices added by discovery",
-                "de": "Daten-Normalisierung der von Discovery hinzugefügten Geräte"
-            },
-            "0.1.2": {
-                "en": "possible exception when deleting unused devices",
-                "de": "Möglicher Ausnahmefehler beim Löschen unbenutzter Geräte"
+            "1.0.0": {
+                "en": "first version for the community",
+                "de": "erste Version für die Community",
+                "ru": "первая версия для сообщества",
+                "pt": "primeira versão para a comunidade",
+                "nl": "eerste versie voor de gemeenschap",
+                "fr": "première version pour la communauté",
+                "it": "prima versione per la comunità",
+                "es": "Primera versión para la comunidad.",
+                "pl": "pierwsza wersja dla społeczności",
+                "zh-cn": "社区的第一个版本"
             }
         },
         "title": "WiFi Light",
+        "titleLang": {
+            "en": "WiFi Light",
+            "de": "WiFi Light",
+            "ru": "WiFi Light",
+            "pt": "WiFi Light",
+            "nl": "WiFi Light",
+            "fr": "WiFi Light",
+            "it": "WiFi Light",
+            "es": "WiFi Light",
+            "pl": "WiFi Light",
+            "zh-cn": "WiFi Light"
+        },
         "desc": {
-            "en": "WiFi Light Devices",
-            "de": "WiFi Light Devices",
-            "ru": "WiFi Light Devices"
+            "en": "WiFi Light Devices"
         },
         "keywords": [
             "ioBroker",
@@ -65,8 +42,8 @@
         "platform": "Javascript/Node.js",
         "mode": "daemon",
         "icon": "wifilight.png",
-        "extIcon": "https://raw.githubusercontent.com/soef/iobroker.wifilight/master/admin/wifilight.png",
-        "readme": "https://github.com/soef/iobroker.wifilight/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/iobroker.wifilight-community/master/admin/wifilight.png",
+        "readme": "https://github.com/iobroker-community-adapters/iobroker.wifilight-community/blob/master/README.md",
         "loglevel": "info",
         "type": "lighting",
         "messagebox": true,
