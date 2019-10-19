@@ -54,12 +54,10 @@
     },
     "main": "main.js",
     "scripts": {
-        "test:js": "mocha --opts test/mocha.custom.opts",
+        "test": "npm run test:package && npm run test:unit",
         "test:package": "mocha test/package --exit",
         "test:unit": "mocha test/unit --exit",
-        "test:integration": "mocha test/integration --exit",
-        "test": "npm run test:js && npm run test:package",
-        "lint": "eslint"
+        "test:integration": "mocha test/integration --exit"
     },
     "bugs": {
         "url": "https://github.com/iobroker-community-adapters/iobroker.wifilight-community/issues"
