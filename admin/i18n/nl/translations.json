@@ -1,0 +1,18 @@
+{
+    "AddDevice": "Voeg # -knop toe om apparaat toe te voegen",
+    "Cannot find any device": "Kan geen nieuwe apparaten vinden",
+    "Enable adapter first": "Schakel eerst de adapter in",
+    "Find a device": "Zoek een apparaat",
+    "Please wait, looking for devices...": "Even geduld aub...",
+    "Select a device": "Selecteer een apparaat",
+    "Settings": "instellingen",
+    "WiFi Light": "WiFi licht",
+    "devices": "Duiklijst",
+    "ip": "IK P",
+    "looking for device": "Op zoek naar apparaten",
+    "name": "Naam",
+    "on save adapter restarts with new config immediately": "on save adapter wordt onmiddellijk opnieuw gestart met nieuwe configuratie",
+    "pollIntervall": "Poll Intervall",
+    "port": "Haven",
+    "type": "Type"
+}

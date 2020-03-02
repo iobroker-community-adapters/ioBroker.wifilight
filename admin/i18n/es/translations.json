@@ -1,0 +1,18 @@
+{
+    "AddDevice": "Agregar #-Botón para agregar el dispositivo",
+    "Cannot find any device": "No se puede encontrar nuevos dispositivos",
+    "Enable adapter first": "Habilitar el adaptador de primera",
+    "Find a device": "Encontrar un dispositivo de",
+    "Please wait, looking for devices...": "Por favor, espere...",
+    "Select a device": "Seleccione un dispositivo",
+    "Settings": "Configuración",
+    "WiFi Light": "WiFi Luz",
+    "devices": "Lista de inmersiones",
+    "ip": "IP",
+    "looking for device": "Buscando dispositivos",
+    "name": "Nombre",
+    "on save adapter restarts with new config immediately": "en guardar adaptador se reinicia con la nueva config de inmediato",
+    "pollIntervall": "Intervalo De Poll",
+    "port": "Puerto",
+    "type": "Tipo de"
+}

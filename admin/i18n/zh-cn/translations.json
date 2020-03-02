@@ -1,0 +1,18 @@
+{
+    "AddDevice": "添加#-添加装置",
+    "Cannot find any device": "无法找到新的设备",
+    "Enable adapter first": "第一个启用适配器",
+    "Find a device": "找到一个设备",
+    "Please wait, looking for devices...": "请等等...",
+    "Select a device": "选择一个设备",
+    "Settings": "设置",
+    "WiFi Light": "无线光",
+    "devices": "潜列表",
+    "ip": "IP",
+    "looking for device": "在寻找的设备",
+    "name": "名称",
+    "on save adapter restarts with new config immediately": "在保存适配器重新启动与新的配置立即",
+    "pollIntervall": "调查区间",
+    "port": "口",
+    "type": "类型"
+}

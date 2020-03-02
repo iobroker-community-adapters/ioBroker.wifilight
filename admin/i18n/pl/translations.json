@@ -1,0 +1,18 @@
+{
+    "AddDevice": "Dodaj #-przycisk, aby dodać urządzenie",
+    "Cannot find any device": "Nie mogę znaleźć nowych urządzeń",
+    "Enable adapter first": "Włączyć zasilacz pierwszy",
+    "Find a device": "Znaleźć urządzenie",
+    "Please wait, looking for devices...": "Proszę czekać...",
+    "Select a device": "Wybierz urządzenie",
+    "Settings": "Parametry",
+    "WiFi Light": "Bezprzewodowy Światło",
+    "devices": "Lista nurkowania ",
+    "ip": "IZ",
+    "looking for device": "Szukam urządzeniach",
+    "name": "Nazwa",
+    "on save adapter restarts with new config immediately": "zapisz ponownym uruchomieniu zasilacza z nowy konfig raz",
+    "pollIntervall": "Interwał Sondowania ",
+    "port": "Port",
+    "type": "Typ"
+}

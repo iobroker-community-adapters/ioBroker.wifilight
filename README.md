@@ -56,11 +56,17 @@ In case of not working try to install the soef npm package
 cd /opt/iobroker/node_modules/iobroker.wifilight 
 sudo npm install soef 
 ```
+
+## Changelog
+
+### 1.0.0 (2019-10-18)
+* (ldittmar) first version for the community
+
 <!--
 ### License
 The MIT License (MIT)
 
-Copyright (c) 2016 soef <soef@gmx.net>
+Copyright (c) 2019 soef <soef@gmx.net>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
