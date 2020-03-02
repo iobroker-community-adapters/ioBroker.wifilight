@@ -1,24 +1,23 @@
 ![Logo](admin/wifilight.png)
-
-#### ioBroker.wifilight 
+# ioBroker.wifilight 
 
 ![Number of Installations](http://iobroker.live/badges/wifilight-community-installed.svg) ![Number of Installations](http://iobroker.live/badges/wifilight-community-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.wifilight.svg)](https://www.npmjs.com/package/iobroker.wifilight)
 [![Tests](http://img.shields.io/travis/soef/ioBroker.wifilight/master.svg)](https://travis-ci.org/soef/ioBroker.wifilight)
 [![Build status](https://ci.appveyor.com/api/projects/status/2hvs4fvfms7xhmnw?svg=true)](https://ci.appveyor.com/project/soef/iobroker-wifilight)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/soef/iobroker.wifilight/blob/master/LICENSE)
 
-#### Description
+## Description
 
 ioBroker Adapter for WiFi Light
 
-#### Info
+## Info
 Supports LW12, LD382 and LD382A.
 Support for Mi-Light/LimitlessLED RGBW added.
 
-### Initial Creation
+## Initial Creation
 This adapter was initialy created by @soef at https://github.com/soef/ioBroker.wifilight but not maintained any more, so we moved it to iobroker-community so that bugs could be fixed. thanks @soef for his work.
 
-###### How to use the command state:
+### How to use the command state:
 + Possible identifiers are: ``red, r, green, g, blue, b, bri, sat, transition, on, off``
 + The string can be a JSON with or without parentheses. 
 + You can also assign a value by =
@@ -38,11 +37,11 @@ on
 To change the color you do not have to use all three vallues.
 For example, ``` red = 0 ```, blue and green will stay unchanged.
 
-###### r, g, b, w States:
+### r, g, b, w States:
 + Values 0..255
 + \#rrggbb[ww]
 
-#### Installation
+## Installation
 Use the Adapter panel in iobroker to add an instance.
 
 If not exists execute the following command in the iobroker root directory (e.g. in /opt/iobroker).
@@ -50,7 +49,7 @@ If not exists execute the following command in the iobroker root directory (e.g.
 npm install iobroker.wifilight 
 ```
 
-#### Error fixing
+### Error fixing
 In case of not working try to install the soef npm package
 ```
 cd /opt/iobroker/node_modules/iobroker.wifilight 
@@ -62,11 +61,10 @@ sudo npm install soef
 ### 1.0.0 (2019-10-18)
 * (ldittmar) first version for the community
 
-<!--
-### License
+## License
 The MIT License (MIT)
 
-Copyright (c) 2019 soef <soef@gmx.net>
+Copyright (c) 2019-2020 soef <soef@gmx.net>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -85,4 +83,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
--->
