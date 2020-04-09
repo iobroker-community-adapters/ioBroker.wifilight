@@ -57,6 +57,8 @@ sudo npm install soef
 ```
 
 ## Changelog
+### 1.1.0 (2020-04-09)
+* (foxriver76) compatibility for js-c 3
 
 ### 1.0.0 (2019-10-18)
 * (ldittmar) first version for the community

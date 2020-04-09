@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "wifilight-community",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "news": {
+            "1.1.0": {
+                "en": "compatibility for js-controller 3",
+                "de": "Kompatibilität für js-controller 3",
+                "ru": "совместимость для js-controller 3",
+                "pt": "compatibilidade para js-controller 3",
+                "nl": "compatibiliteit voor js-controller 3",
+                "fr": "compatibilité pour js-controller 3",
+                "it": "compatibilità per js-controller 3",
+                "es": "compatibilidad para js-controller 3",
+                "pl": "kompatybilność z js-kontrolerem 3",
+                "zh-cn": "js-controller 3的兼容性"
+            },
             "1.0.0": {
                 "en": "first version for the community",
                 "de": "erste Version für die Community",
@@ -51,8 +63,8 @@
         "platform": "Javascript/Node.js",
         "mode": "daemon",
         "icon": "wifilight.png",
-        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/iobroker.wifilight-community/master/admin/wifilight.png",
-        "readme": "https://github.com/iobroker-community-adapters/iobroker.wifilight-community/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/iobroker.wifilight/master/admin/wifilight.png",
+        "readme": "https://github.com/iobroker-community-adapters/iobroker.wifilight/blob/master/README.md",
         "loglevel": "info",
         "type": "lighting",
         "messagebox": true,
