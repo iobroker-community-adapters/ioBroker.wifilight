@@ -2,7 +2,7 @@
 
 var discovery = require(__dirname + '/lib/discovery'),
     colors = require(__dirname + '/lib/colors'),
-    soef = require('soef'),
+    soef = require('lib/soef'),
     net = require('net');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
