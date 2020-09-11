@@ -25,7 +25,7 @@
         "url": "https://github.com/iobroker-community-adapters/iobroker.wifilight"
     },
     "optionalDependencies": {
-        "mdns-discovery": "^0.1.12"
+        "mdns-discovery": "^0.2.6"
     },
     "dependencies": {
         "netmask": "^1.0.6",
