@@ -74,7 +74,15 @@
                 "name": "soef",
                 "email": "soef@gmx.net"
             }
-        ]
+        ],
+        "dependencies": [
+            {
+                "js-controller": ">=3.3.0"
+            }
+        ],
+        "dataSource": "push",
+        "connectionType": "local",
+        "tier": 2
     },
     "native": {
         "devices": []

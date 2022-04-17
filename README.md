@@ -57,6 +57,10 @@ sudo npm install soef
 ```
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) Prevent error logs with js-controller 3+
+
 ### 1.1.0 (2020-04-09)
 * (foxriver76) compatibility for js-c 3
 
