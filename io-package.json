@@ -1,97 +1,109 @@
 {
-    "common": {
-        "name": "wifilight",
-        "version": "1.1.0",
-        "news": {
-            "1.1.0": {
-                "en": "compatibility for js-controller 3",
-                "de": "Kompatibilität für js-controller 3",
-                "ru": "совместимость для js-controller 3",
-                "pt": "compatibilidade para js-controller 3",
-                "nl": "compatibiliteit voor js-controller 3",
-                "fr": "compatibilité pour js-controller 3",
-                "it": "compatibilità per js-controller 3",
-                "es": "compatibilidad para js-controller 3",
-                "pl": "kompatybilność z js-kontrolerem 3",
-                "zh-cn": "js-controller 3的兼容性"
-            },
-            "1.0.0": {
-                "en": "first version for the community",
-                "de": "erste Version für die Community",
-                "ru": "первая версия для сообщества",
-                "pt": "primeira versão para a comunidade",
-                "nl": "eerste versie voor de gemeenschap",
-                "fr": "première version pour la communauté",
-                "it": "prima versione per la comunità",
-                "es": "Primera versión para la comunidad.",
-                "pl": "pierwsza wersja dla społeczności",
-                "zh-cn": "社区的第一个版本"
-            }
-        },
-        "title": "WiFi Light",
-        "titleLang": {
-            "en": "WiFi Light",
-            "de": "WiFi Light",
-            "ru": "WiFi Light",
-            "pt": "WiFi Light",
-            "nl": "WiFi Light",
-            "fr": "WiFi Light",
-            "it": "WiFi Light",
-            "es": "WiFi Light",
-            "pl": "WiFi Light",
-            "zh-cn": "WiFi Light"
-        },
-        "desc": {
-            "en": "WiFi Light Devices",
-            "de": "WiFi-Licht-Geräte",
-            "ru": "Световые Приборы Беспроводной Доступ В Интернет ",
-            "pt": "Luz Wi-Fi De Dispositivos",
-            "nl": "WiFi-Apparaten Licht",
-            "fr": "WiFi Des Appareils Légers",
-            "it": "WiFi Luce Di Dispositivi",
-            "es": "WiFi De Los Dispositivos De Luz",
-            "pl": "Oświetlenie Bezprzewodowy Dostęp Do Internetu ",
-            "zh-cn": "无线光设备"
-        },
-        "keywords": [
-            "ioBroker",
-            "wifilight",
-            "lw12",
-            "ld382"
-        ],
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "icon": "wifilight.png",
-        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/iobroker.wifilight/master/admin/wifilight.png",
-        "readme": "https://github.com/iobroker-community-adapters/iobroker.wifilight/blob/master/README.md",
-        "loglevel": "info",
-        "type": "lighting",
-        "messagebox": true,
-        "enabled": true,
-        "authors": [
-            {
-                "name": "soef",
-                "email": "soef@gmx.net"
-            }
-        ],
-        "dependencies": [
-            {
-                "js-controller": ">=3.3.0"
-            }
-        ],
-        "plugins": {
-            "sentry": {
-                "dsn": "https://65b8526e3ca442739e46753bfaf9a0a9@sentry.iobroker.net/190"
-            }
-        },
-        "dataSource": "push",
-        "connectionType": "local",
-        "tier": 2
+  "common": {
+    "name": "wifilight",
+    "version": "1.1.1",
+    "news": {
+      "1.1.1": {
+        "en": "Prevent error logs with js-controller 3+\nAdded sentry for error reporting",
+        "de": "Verhindern Sie Fehlerprotokolle mit js-controller 3+\nWachposten für Fehlerberichte hinzugefügt",
+        "ru": "Предотвратите журналы ошибок с помощью js-controller 3+\nДобавлен часовой для отчетов об ошибках",
+        "pt": "Evite logs de erros com js-controller 3+\nSentinela adicionada para relatório de erros",
+        "nl": "Voorkom foutenlogboeken met js-controller 3+\nSchildwacht toegevoegd voor foutrapportage",
+        "fr": "Empêcher les journaux d'erreurs avec js-controller 3+\nSentry ajouté pour le rapport d'erreur",
+        "it": "Impedisci i log di errore con js-controller 3+\nAggiunta sentinella per la segnalazione degli errori",
+        "es": "Evite registros de errores con js-controller 3+\nCentinela añadido para el informe de errores",
+        "pl": "Zapobiegaj dziennikom błędów dzięki js-controller 3+\nDodano działko do raportowania błędów",
+        "zh-cn": "使用 js-controller 3+ 防止错误日志\n添加了错误报告的哨兵"
+      },
+      "1.1.0": {
+        "en": "compatibility for js-controller 3",
+        "de": "Kompatibilität für js-controller 3",
+        "ru": "совместимость для js-controller 3",
+        "pt": "compatibilidade para js-controller 3",
+        "nl": "compatibiliteit voor js-controller 3",
+        "fr": "compatibilité pour js-controller 3",
+        "it": "compatibilità per js-controller 3",
+        "es": "compatibilidad para js-controller 3",
+        "pl": "kompatybilność z js-kontrolerem 3",
+        "zh-cn": "js-controller 3的兼容性"
+      },
+      "1.0.0": {
+        "en": "first version for the community",
+        "de": "erste Version für die Community",
+        "ru": "первая версия для сообщества",
+        "pt": "primeira versão para a comunidade",
+        "nl": "eerste versie voor de gemeenschap",
+        "fr": "première version pour la communauté",
+        "it": "prima versione per la comunità",
+        "es": "Primera versión para la comunidad.",
+        "pl": "pierwsza wersja dla społeczności",
+        "zh-cn": "社区的第一个版本"
+      }
     },
-    "native": {
-        "devices": []
+    "title": "WiFi Light",
+    "titleLang": {
+      "en": "WiFi Light",
+      "de": "WiFi Light",
+      "ru": "WiFi Light",
+      "pt": "WiFi Light",
+      "nl": "WiFi Light",
+      "fr": "WiFi Light",
+      "it": "WiFi Light",
+      "es": "WiFi Light",
+      "pl": "WiFi Light",
+      "zh-cn": "WiFi Light"
     },
-    "instanceObjects": [],
-    "objects": []
+    "desc": {
+      "en": "WiFi Light Devices",
+      "de": "WiFi-Licht-Geräte",
+      "ru": "Световые Приборы Беспроводной Доступ В Интернет ",
+      "pt": "Luz Wi-Fi De Dispositivos",
+      "nl": "WiFi-Apparaten Licht",
+      "fr": "WiFi Des Appareils Légers",
+      "it": "WiFi Luce Di Dispositivi",
+      "es": "WiFi De Los Dispositivos De Luz",
+      "pl": "Oświetlenie Bezprzewodowy Dostęp Do Internetu ",
+      "zh-cn": "无线光设备"
+    },
+    "keywords": [
+      "ioBroker",
+      "wifilight",
+      "lw12",
+      "ld382"
+    ],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "wifilight.png",
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/iobroker.wifilight/master/admin/wifilight.png",
+    "readme": "https://github.com/iobroker-community-adapters/iobroker.wifilight/blob/master/README.md",
+    "loglevel": "info",
+    "type": "lighting",
+    "messagebox": true,
+    "enabled": true,
+    "authors": [
+      {
+        "name": "soef",
+        "email": "soef@gmx.net"
+      }
+    ],
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.0"
+      }
+    ],
+    "plugins": {
+      "sentry": {
+        "dsn": "https://65b8526e3ca442739e46753bfaf9a0a9@sentry.iobroker.net/190"
+      }
+    },
+    "dataSource": "push",
+    "connectionType": "local",
+    "tier": 2
+  },
+  "native": {
+    "devices": []
+  },
+  "instanceObjects": [],
+  "objects": []
 }
