@@ -99,7 +99,7 @@ var usedStateNames = {
     refresh:     { n: 'refresh',   g:1, val: false, common: { type: "boolean",  desc: 'read states from device' }},
     transition:  { n: 'trans',     g:1, val: 30,    common: { type: "number", unit: '\u2152 s', desc: 'in 10th seconds'} },
     command:     { n: 'command',   g:3, val: 'r:0, g:0, b:0, on:true, transition:30', desc: 'r:0, g:0, b:0, on:true, transition:2' },
-    rgb:         { n: 'rgb',       g:3, val: '',    common: { type: "text", desc: '000000..ffffff' , role: "level.color.rgb"},
+    rgb:         { n: 'rgb',       g:3, val: '',    common: { type: "text", desc: '000000..ffffff' , role: "level.color.rgb"}},
     onTime:      { n: 'onTime',    g:3, val: '',    common: {}}
 };
 

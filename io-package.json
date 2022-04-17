@@ -80,6 +80,11 @@
                 "js-controller": ">=3.3.0"
             }
         ],
+        "plugins": {
+            "sentry": {
+                "dsn": "https://65b8526e3ca442739e46753bfaf9a0a9@sentry.iobroker.net/190"
+            }
+        },
         "dataSource": "push",
         "connectionType": "local",
         "tier": 2
