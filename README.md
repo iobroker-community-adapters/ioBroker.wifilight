@@ -62,6 +62,10 @@ sudo npm install soef
 ```
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) Prevent crashes when states are controlled with null as value
+
 ### 1.1.1 (2022-04-17)
 * (Apollon77) Prevent error logs with js-controller 3+
 * (Apollon77) Added sentry for error reporting

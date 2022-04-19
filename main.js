@@ -139,7 +139,7 @@ function onStateChange(id, state) {
     }
     var stateName = ar[3];
     var device = wifi[deviceName];
-    if (device == undefined || !device.isOnline) return;
+    if (device == undefined || !device.isOnline || !state || state.val === null || state.ack) return;
     if (device.cmds.decodeResponse) devices.invalidate(id);
     device.stopRunningProgram();
     device.onStateChange(channelName, stateName, state.val);
