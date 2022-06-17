@@ -62,6 +62,9 @@ sudo npm install soef
 ```
 
 ## Changelog
+### __WORK IN PROGRESS__
+* (Apollon77) Prevent crash case reported by sentry
+
 ### 1.1.3 (2022-04-27)
 * (Apollon77) Prevent crash case reported by sentry
 
