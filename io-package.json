@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "news": {
+      "1.1.4": {
+        "en": "Prevent crash case reported by sentry",
+        "de": "Verhindern Sie Crashfall angezeigt",
+        "ru": "Предотвратить случай аварии, сообщенный отправкой",
+        "pt": "Impedir caso de acidente relatado por sentinela",
+        "nl": "Vertaling:",
+        "fr": "Prévenir l ' accident signalé par la sentinelle",
+        "it": "Prevenire caso di crash segnalato da mittente",
+        "es": "Caso de emergencia reportado por centinela",
+        "pl": "Sprawa przedwczesna doniesiona przez przesyłkę",
+        "zh-cn": "D. 发交的事故"
+      },
       "1.1.3": {
         "en": "Prevent crash case reported by sentry",
         "de": "Verhindern Sie einen von der Wache gemeldeten Absturzfall",
