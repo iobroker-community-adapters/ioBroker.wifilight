@@ -11,7 +11,7 @@
     "ip": "IP",
     "looking for device": "Suche Geräte",
     "name": "Bezeichnung",
-    "on save adapter restarts with new config immediately": "Beim Speichern der Einstellungen wird der Adapter automatisch neu gestartet.",
+    "on save adapter restarts with new config immediately": "Beim Speichern wird der Adapter sofort mit der neuen Konfiguration neu gestartet",
     "pollIntervall": "Pollintervall",
     "port": "Port",
     "type": "Typ"
