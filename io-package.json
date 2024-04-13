@@ -76,7 +76,6 @@
         "zh-cn": "社区的第一个版本"
       }
     },
-    "title": "WiFi Light",
     "titleLang": {
       "en": "WiFi Light",
       "de": "WiFi Light",
@@ -107,7 +106,10 @@
       "lw12",
       "ld382"
     ],
-    "license": "MIT",
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "icon": "wifilight.png",
@@ -125,7 +127,12 @@
     ],
     "dependencies": [
       {
-        "js-controller": ">=3.3.0"
+        "js-controller": ">=35.0.0"
+      }
+    ],
+    "globalDependencies": [
+      {
+          "admin": ">=5.1.13"
       }
     ],
     "plugins": {
