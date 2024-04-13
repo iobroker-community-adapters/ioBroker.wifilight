@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "news": {
+      "1.2.1": {
+        "en": "Dependencies have been updated",
+        "de": "Abhängigkeiten wurden aktualisiert",
+        "ru": "Зависимость обновлена",
+        "pt": "As dependências foram atualizadas",
+        "nl": "Afhankelijkheden zijn bijgewerkt",
+        "fr": "Les dépendances ont été actualisées",
+        "it": "Le dipendenze sono state aggiornate",
+        "es": "Se han actualizado las dependencias",
+        "pl": "Zaktualizowano zależności",
+        "uk": "Залежність було оновлено",
+        "zh-cn": "依赖关系已更新"
+      },
       "1.2.0": {
         "en": "Adapter requires node.js 18 and js-controller >= 5 now\nDependencies have been updated",
         "de": "Adapter benötigt node.js 18 und js-controller >= 5 jetzt\nAbhängigkeiten wurden aktualisiert",
@@ -75,18 +88,6 @@
         "es": "compatibilidad para js-controller 3",
         "pl": "kompatybilność z js-kontrolerem 3",
         "zh-cn": "js-controller 3的兼容性"
-      },
-      "1.0.0": {
-        "en": "first version for the community",
-        "de": "erste Version für die Community",
-        "ru": "первая версия для сообщества",
-        "pt": "primeira versão para a comunidade",
-        "nl": "eerste versie voor de gemeenschap",
-        "fr": "première version pour la communauté",
-        "it": "prima versione per la comunità",
-        "es": "Primera versión para la comunidad.",
-        "pl": "pierwsza wersja dla społeczności",
-        "zh-cn": "社区的第一个版本"
       }
     },
     "titleLang": {

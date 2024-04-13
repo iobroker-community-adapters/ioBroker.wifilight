@@ -66,7 +66,7 @@ sudo npm install soef
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.1 (2024-04-13)
 * (mcm1957) Dependencies have been updated
 
 ### 1.2.0 (2024-04-13)
