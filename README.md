@@ -66,7 +66,7 @@ sudo npm install soef
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.2 (2024-04-15)
 * (mcm1957) Fix js-controller dependency
 
 ### 1.2.1 (2024-04-13)

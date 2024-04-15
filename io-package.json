@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "news": {
+      "1.2.2": {
+        "en": "Fix js-controller dependency",
+        "de": "Js-controller Abhängigkeit",
+        "ru": "Фикс js-контроллер зависимость",
+        "pt": "Fix js-controller dependência",
+        "nl": "Fix js-controller afhankelijkheid",
+        "fr": "Correction de la dépendance de js-controller",
+        "it": "Fissare la dipendenza da js-controller",
+        "es": "Fijar la dependencia js-controller",
+        "pl": "Popraw zależność kontrolera js-",
+        "uk": "Виправлення залежності js-controller",
+        "zh-cn": "修复js控制器依赖性"
+      },
       "1.2.1": {
         "en": "Dependencies have been updated",
         "de": "Abhängigkeiten wurden aktualisiert",
@@ -76,18 +89,6 @@
         "es": "Evite registros de errores con js-controller 3+\nCentinela añadido para el informe de errores",
         "pl": "Zapobiegaj dziennikom błędów dzięki js-controller 3+\nDodano działko do raportowania błędów",
         "zh-cn": "使用 js-controller 3+ 防止错误日志\n添加了错误报告的哨兵"
-      },
-      "1.1.0": {
-        "en": "compatibility for js-controller 3",
-        "de": "Kompatibilität für js-controller 3",
-        "ru": "совместимость для js-controller 3",
-        "pt": "compatibilidade para js-controller 3",
-        "nl": "compatibiliteit voor js-controller 3",
-        "fr": "compatibilité pour js-controller 3",
-        "it": "compatibilità per js-controller 3",
-        "es": "compatibilidad para js-controller 3",
-        "pl": "kompatybilność z js-kontrolerem 3",
-        "zh-cn": "js-controller 3的兼容性"
       }
     },
     "titleLang": {
