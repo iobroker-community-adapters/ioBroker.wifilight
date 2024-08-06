@@ -55,6 +55,7 @@ exports.LW12 = {
     vmax: 255,
     delay: 10,
     responseLen: 11,
+    resposneLen2: 11,
     on: [0xCC, 0x23, 0x33],
     off: [0xCC, 0x24, 0x33],
     rgb: [0x56, VARS.red, VARS.green, VARS.blue, 0xAA],
@@ -65,7 +66,7 @@ exports.LW12 = {
     programNames: programNames,
 
     decodeResponse: function(data) {
-        if (data[0] != 0x66 || data[1] != 0x01) return null;
+        if (data[0] != 0x66 || data[1] != 0x01) return [11, null];
         var result = {
             //power: ((data[2] === 0x23) ? true : false),
             on: ((data[2] === 0x23) ? true : false),
@@ -78,7 +79,7 @@ exports.LW12 = {
         };
         if (data[9] == 1 && data[10] == 0x99) {
         }
-        return result;
+        return [11, result];
     }
 };
 
@@ -89,6 +90,7 @@ exports.LD382A = {
 
     delay: 10,
     responseLen: 14,
+    responseLen2: 4,
     on: [0x71, 0x23, 0x0f],
     off: [0x71, 0x24, 0x0f],
     rgb: [0x31, VARS.red, VARS.green, VARS.blue, 0xff /*VARS.white*/, 0x00, 0x0f],
@@ -100,9 +102,11 @@ exports.LD382A = {
     programNames: programNames,
 
     decodeResponse: function(data) {
-        if (data[0] !== 129) return null;
+        // If power on / off request, result is 4 bytes long and second byte is 0x71
+        if (data[1] == 0x71) return [4, null]; // ignore it
+        if (data[0] !== 129 /* = 0x81 */) return [0, null];
         //[129, 4, 35, 97, 33, 9, 11, 22, 33, 255, 3, 0, 0, 119]
-        return {
+        return [14, {
             //power: ((data[2] === 0x23) ? true : false),
             on: ((data[2] === 0x23) ? true : false),
             //power: ((data[13] & 0x01) ? true : false),
@@ -114,7 +118,7 @@ exports.LD382A = {
             green: data[7],
             blue: data[8],
             white: data[9]
-        };
+        }];
     }
 };
 
@@ -123,8 +127,9 @@ exports.LD686 = {
      port: 5577,
      //onlyConnectOnWrite: true,
 
-      delay: 10,
+     delay: 10,
      responseLen: 14,
+     responseLen2: 14,
      on: [0x71, 0x23, 0x0f],
      off: [0x71, 0x24, 0x0f],
      //additional HEX field for RGBW. 0xF0 = RGB only; 0x0F WW only; 0xFF RGBW
@@ -137,9 +142,9 @@ exports.LD686 = {
      programNames: programNames,
 
       decodeResponse: function(data) {
-         if (data[0] !== 129) return null;
+         if (data[0] !== 129) return [0, null];
          //[129, 4, 35, 97, 33, 9, 11, 22, 33, 255, 3, 0, 0, 119]
-         return {
+         return [14, {
              //power: ((data[2] === 0x23) ? true : false),
              on: ((data[2] === 0x23) ? true : false),
              //power: ((data[13] & 0x01) ? true : false),
@@ -151,7 +156,7 @@ exports.LD686 = {
              green: data[7],
              blue: data[8],
              white: data[9]
-         };
+         }];
      }
  };
 
