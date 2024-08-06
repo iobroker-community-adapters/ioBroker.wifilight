@@ -716,12 +716,12 @@ WifiLight.prototype.onData = function (data) {
     this.dataBuffer.set(data, this.dataBuffer.pos);
     this.dataBuffer.pos += data.length;
 
-    while (this.dataBuffer.pos >= this.cmds.responseLen)
+    while (this.dataBuffer.pos >= this.cmds.responseLen || this.dataBuffer.pos >= this.cmds.responseLen2)
     {
-        var states = this.cmds.decodeResponse(this.dataBuffer);
-        this.log('onData: raw: ' + hex(this.dataBuffer, this.cmds.responseLen));
-        this.dataBuffer.copyWithin(0, this.cmds.responseLen, this.dataBuffer.pos);
-        this.dataBuffer.pos -= this.cmds.responseLen;
+        var [lengthRead, states] = this.cmds.decodeResponse(this.dataBuffer);
+        this.log('onData: raw: ' + hex(this.dataBuffer, lengthRead));
+        this.dataBuffer.copyWithin(0, lengthRead, this.dataBuffer.pos);
+        this.dataBuffer.pos -= lengthRead;
         if (!states) break;
         this.states = states;
         this.log('onData: ' + JSON.stringify(this.states));
