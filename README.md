@@ -51,7 +51,7 @@ For example, `red = 0`, blue and green will stay unchanged.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.3.0 (2024-08-12)
 * (p-kehling) Added ignorance of acknowledgement messages for on/off commands
 * (bluefox) refactoring
 

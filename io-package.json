@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "1.2.2",
+    "version": "1.3.0",
     "news": {
+      "1.3.0": {
+        "en": "Added ignorance of acknowledgement messages for on/off commands\nrefactoring",
+        "de": "Unwissenheit von Quittungsnachrichten für on/off-Befehle hinzugefügt\nrefaktor",
+        "ru": "Добавлено невежество в отношении сообщений о признании для команд on/off\nрефакторинг",
+        "pt": "Adicionado ignorância de mensagens de reconhecimento para comandos on/off\nrefactoring",
+        "nl": "Toegevoegd onwetendheid van bevestigingsberichten voor aan/uit commando's\nrefactoring",
+        "fr": "Ajout de l'ignorance des messages de reconnaissance pour les commandes on/off\nrefactoration",
+        "it": "Aggiunta ignoranza dei messaggi di riconoscimento per i comandi on/off\nrefactoring",
+        "es": "Añadido ignorancia de los mensajes de reconocimiento para comandos on/off\nrefactoring",
+        "pl": "Dodano ignorancję komunikatów o potwierdzeniu dla poleceń on / off\nrefaktoring",
+        "uk": "Додано ігнорування повідомлень про видачу/вимкнення\nрефакторинг",
+        "zh-cn": "对打开/关闭命令的识别消息无知\n正在重构"
+      },
       "1.2.2": {
         "en": "Fix js-controller dependency",
         "de": "Js-controller Abhängigkeit",
@@ -77,18 +90,6 @@
         "es": "Evita bloqueos cuando los estados se controlan con un valor nulo",
         "pl": "Zapobiegaj awariom, gdy stany są kontrolowane z wartością null",
         "zh-cn": "以 null 作为值控制状态时防止崩溃"
-      },
-      "1.1.1": {
-        "en": "Prevent error logs with js-controller 3+\nAdded sentry for error reporting",
-        "de": "Verhindern Sie Fehlerprotokolle mit js-controller 3+\nWachposten für Fehlerberichte hinzugefügt",
-        "ru": "Предотвратите журналы ошибок с помощью js-controller 3+\nДобавлен часовой для отчетов об ошибках",
-        "pt": "Evite logs de erros com js-controller 3+\nSentinela adicionada para relatório de erros",
-        "nl": "Voorkom foutenlogboeken met js-controller 3+\nSchildwacht toegevoegd voor foutrapportage",
-        "fr": "Empêcher les journaux d'erreurs avec js-controller 3+\nSentry ajouté pour le rapport d'erreur",
-        "it": "Impedisci i log di errore con js-controller 3+\nAggiunta sentinella per la segnalazione degli errori",
-        "es": "Evite registros de errores con js-controller 3+\nCentinela añadido para el informe de errores",
-        "pl": "Zapobiegaj dziennikom błędów dzięki js-controller 3+\nDodano działko do raportowania błędów",
-        "zh-cn": "使用 js-controller 3+ 防止错误日志\n添加了错误报告的哨兵"
       }
     },
     "titleLang": {
