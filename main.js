@@ -82,7 +82,7 @@ function onUnload(callback) {
 const cmds = require('./lib/devices');
 
 const usedStateNames = {
-    online:      { n: 'reachable', g: 1, val: 0,     common: { write: false, type: 'boolean', role: 'indicator.reachable'}},
+    online:      { n: 'reachable', g: 1, val: false, common: { write: false, type: 'boolean', role: 'indicator.reachable'}},
     on:          { n: 'on',        g: 3, val: false, common: { type: 'boolean', role: 'switch' }},
     bri:         { n: 'bri',       g: 3, val: 100,   common: { type: 'number', min: 0, max: 100, unit: '%', desc: '0..100%', role: 'level.dimmer' }},
     ct:          { n: 'ct',        g: 1, val: 0,     common: { type: 'number', min: 0, max: 5000, unit: '°K', desc: 'temperature in °Kelvin 0..5000', role: 'level.color.temperature' }},
