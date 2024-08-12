@@ -1,33 +1,3 @@
-# This is a fork, to share a small fix for MagicHome LED Pixel controller (LD382A)
-
-My wifi controller returns after power on / off 4 bytes of data, like an acknowledgement. The logic of the adapter cannot parse these additional 4 bytes, so all calls after it were not parsed anymore and so the ioBroker objects are not updated. The fix includes a way to ignore these 4 bytes. Maybe there is a better way, to do it? I would also recommend to remove the buffer and parse data array directly in onData method. Don't know, why we need a buffer there.
-
-My issue was here (after debug log enabled):
-
-```
-write: 81 8a 8b 96 <-- Write "Refresh command"
-raw data length: 14
-raw data: 81 a1 24 00 61 64 ff ff ff 02 03 01 68 76 <-- Receive data, starts every time with 0x81, when there is a refresh before (contains colors r,g,b,w, power on/off, progOn, ...)
-onData: raw: 81 a1 24 00 61 64 ff ff ff 02 03 01 68 76
-onData: {"on":false,"progNo":0,"progOn":false,"preogSpeed":100,"red":255,"green":255,"blue":255,"white":2} <-- Refresh works, can be parsed - okay
-write: 71 23 0f a3 <-- Send Power On or off command
-raw data length: 4 <-- The controller returns 4 bytes like an acknowledgement. These are ignored by the fix.
-raw data: 0f 71 23 a3
-raw data length: 14 <-- this is a normal refresh response
-raw data: 81 a1 23 00 61 64 ff ff ff 02 03 01 68 75
-onData: raw: 0f 71 23 a3 81 a1 23 00 61 64 ff ff ff 02 <-- The buffer now has 4 bytes ack + 14 bytes response = not parsable anymore
-raw data length: 14
-raw data: 81 a1 23 00 61 64 ff ff ff 02 03 01 68 75
-onData: raw: 03 01 68 75 81 a1 23 00 61 64 ff ff ff 02
-raw data length: 14
-raw data: 81 a1 23 00 61 64 ff ff ff 02 03 01 68 75
-onData: raw: 03 01 68 75 81 a1 23 00 61 64 ff ff ff 02
-write: 81 8a 8b 96 <-- manual refresh also don't work, because the buffer has 4 bytes ack in it
-raw data length: 14
-raw data: 81 a1 23 00 61 64 ff ff ff 02 03 01 68 75
-onData: raw: 03 01 68 75 81 a1 23 00 61 64 ff ff ff 02
-```
-
 ![Logo](admin/wifilight.png)
 # ioBroker.wifilight 
 

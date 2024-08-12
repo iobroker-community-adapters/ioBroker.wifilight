@@ -157,7 +157,8 @@
     },
     "dataSource": "push",
     "connectionType": "local",
-    "tier": 2
+    "tier": 2,
+    "compact": true
   },
   "native": {
     "devices": []
