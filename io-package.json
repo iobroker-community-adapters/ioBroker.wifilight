@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "news": {
+      "1.3.2": {
+        "en": "files section has been fixed",
+        "de": "dateien abschnitt wurde behoben",
+        "ru": "раздел файлов был исправлен",
+        "pt": "seção de arquivos foi corrigido",
+        "nl": "bestandssectie is hersteld",
+        "fr": "la section fichiers a été corrigée",
+        "it": "la sezione file è stata fissata",
+        "es": "sección de archivos ha sido fijo",
+        "pl": "sekcja plików została naprawiona",
+        "uk": "розділ файлів було виправлено",
+        "zh-cn": "文件区域已固定"
+      },
       "1.3.1": {
         "en": "Added ignorance of acknowledgement messages for on/off commands\nrefactoring",
         "de": "Unwissenheit von Quittungsnachrichten für on/off-Befehle hinzugefügt\nrefaktor",
@@ -78,18 +91,6 @@
         "es": "Prevenir caso de bloqueo informado por centinela",
         "pl": "Zapobiegaj awariom zgłoszonym przez wartownika",
         "zh-cn": "防止哨兵报告的坠机事件"
-      },
-      "1.1.2": {
-        "en": "Prevent crashes when states are controlled with null as value",
-        "de": "Abstürze verhindern, wenn Zustände mit null als Wert gesteuert werden",
-        "ru": "Предотвратите сбои, когда состояния контролируются с нулевым значением в качестве значения",
-        "pt": "Evitar travamentos quando os estados são controlados com valor nulo",
-        "nl": "Voorkom crashes wanneer staten worden gecontroleerd met null als waarde",
-        "fr": "Empêcher les plantages lorsque les états sont contrôlés avec null comme valeur",
-        "it": "Impedisci arresti anomali quando gli stati sono controllati con null come valore",
-        "es": "Evita bloqueos cuando los estados se controlan con un valor nulo",
-        "pl": "Zapobiegaj awariom, gdy stany są kontrolowane z wartością null",
-        "zh-cn": "以 null 作为值控制状态时防止崩溃"
       }
     },
     "titleLang": {

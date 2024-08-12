@@ -51,7 +51,7 @@ For example, `red = 0`, blue and green will stay unchanged.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.3.2 (2024-08-12)
 * (mcm1957) files section has been fixed
 
 ### 1.3.1 (2024-08-12)
