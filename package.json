@@ -1,6 +1,6 @@
 {
   "name": "iobroker.wifilight",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "WiFi Light Adapter",
   "author": {
     "name": "soef",

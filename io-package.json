@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "1.3.2",
+    "version": "1.3.3",
     "news": {
+      "1.3.3": {
+        "en": "Just renamed some functions",
+        "de": "Nur einige Funktionen umbenannt",
+        "ru": "Просто переименовали некоторые функции",
+        "pt": "Apenas renomeado algumas funções",
+        "nl": "Een aantal functies hernoemd",
+        "fr": "Juste rebaptisé certaines fonctions",
+        "it": "Solo rinominato alcune funzioni",
+        "es": "Sólo renombra algunas funciones",
+        "pl": "Po prostu zmieniłem nazwę kilku funkcji",
+        "uk": "Просто перейменуйте деякі функції",
+        "zh-cn": "刚刚重新命名了一些功能"
+      },
       "1.3.2": {
         "en": "files section has been fixed",
         "de": "dateien abschnitt wurde behoben",
@@ -79,18 +92,6 @@
         "es": "Caso de emergencia reportado por centinela",
         "pl": "Sprawa przedwczesna doniesiona przez przesyłkę",
         "zh-cn": "D. 发交的事故"
-      },
-      "1.1.3": {
-        "en": "Prevent crash case reported by sentry",
-        "de": "Verhindern Sie einen von der Wache gemeldeten Absturzfall",
-        "ru": "Предотвратить сбой, о котором сообщил часовой",
-        "pt": "Prevenir caso de acidente relatado pela sentinela",
-        "nl": "Voorkom crashgeval gemeld door schildwacht",
-        "fr": "Empêcher le cas d'accident signalé par la sentinelle",
-        "it": "Prevenire il caso di crash segnalato dalla sentinella",
-        "es": "Prevenir caso de bloqueo informado por centinela",
-        "pl": "Zapobiegaj awariom zgłoszonym przez wartownika",
-        "zh-cn": "防止哨兵报告的坠机事件"
       }
     },
     "titleLang": {
