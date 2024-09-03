@@ -104,22 +104,23 @@
       "it": "WiFi Light",
       "es": "WiFi Light",
       "pl": "WiFi Light",
+      "uk": "WiFi Light",
       "zh-cn": "WiFi Light"
     },
     "desc": {
       "en": "WiFi Light Devices",
       "de": "WiFi-Licht-Geräte",
-      "ru": "Световые Приборы Беспроводной Доступ В Интернет ",
+      "ru": "WiFi Light устройства",
+      "uk": "WiFi Light пристрої",
       "pt": "Luz Wi-Fi De Dispositivos",
       "nl": "WiFi-Apparaten Licht",
       "fr": "WiFi Des Appareils Légers",
       "it": "WiFi Luce Di Dispositivi",
       "es": "WiFi De Los Dispositivos De Luz",
-      "pl": "Oświetlenie Bezprzewodowy Dostęp Do Internetu ",
+      "pl": "Oświetlenie Bezprzewodowy Dostęp Do Internetu",
       "zh-cn": "无线光设备"
     },
     "keywords": [
-      "ioBroker",
       "wifilight",
       "lw12",
       "ld382"
