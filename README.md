@@ -51,6 +51,9 @@ For example, `red = 0`, blue and green will stay unchanged.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (bluefox) Formatting of the code
+
 ### 1.3.3 (2024-09-03)
 * (bluefox) Just renamed some functions
 
