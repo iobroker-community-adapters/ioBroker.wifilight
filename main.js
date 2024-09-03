@@ -1,6 +1,6 @@
 ﻿const net = require('node:net');
 const discovery = require('./lib/discovery');
-const Colors = require('./lib/colors');
+const { rgb2hsv, roundRGB, ct2rgb, hsv2rgb } = require('./lib/colors');
 const soef = require('./lib/dontBeSoSoef');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ function onMessage (obj) {
     switch (obj.command) {
         case 'discovery':
             discovery.scanForAllDevices(
-                function(entry) {
+                function (entry) {
                     const ret = !adapter.config.devices.some(e => e.ip === entry.ip);
                     if (ret) {
                         const dev = fromDeviceName(entry.name);
@@ -53,6 +53,7 @@ function onMessage (obj) {
                 }
             );
             return true;
+
         default:
             adapter.log.warn(`Unknown command: ${obj.command}`);
             break;
@@ -123,7 +124,7 @@ function parseHexColors(val) {
         for (const i in co) {
             co[i] *= m;
         }
-        Colors.roundRGB(co);
+        roundRGB(co);
     }
     return co;
 }
@@ -131,7 +132,7 @@ function parseHexColors(val) {
 
 function onStateChange(id, state) {
     const ar = id.split('.');
-    //const dcs = adapter.idToDCS(id);
+    // const dcs = adapter.idToDCS(id);
     let deviceName = ar[2];
     let channelName = '';
     if (ar.length > 4) {
@@ -191,6 +192,7 @@ WifiLight.prototype.run = function (cb) {
         this.states = { red: 0, green: 0, blue: 0 };
         this.start(cb);
     }.bind(this));
+
     return this;
 };
 
@@ -311,7 +313,7 @@ WifiLight.prototype.onStateChange = function (channel, stateName, val) {
                     blue: 'b',
                     white: 'w',
                     transition: 'x',
-                    bri: 'l'
+                    bri: 'l',
                     //, off: 'on:0'
                 }[match];
             });
@@ -714,7 +716,7 @@ WifiLight.prototype.fade = function (channel, rgbw, transitionTime) {
         if (co.w !== undefined) {
             co.w += dif.w;
         }
-        this.color(channel, Colors.roundRGB(co, true), { delay });
+        this.color(channel, roundRGB(co, true), { delay });
     }
 };
 
@@ -725,14 +727,14 @@ WifiLight.prototype.color = function (channel, rgbw, opt) {
 };
 
 WifiLight.prototype.ct = function (channel, temp, transitionTime) {
-    let co = Colors.ct2rgb(temp);
-    const hsv = Colors.rgb2hsv(co);
+    let co = ct2rgb(temp);
+    const hsv = rgb2hsv(co);
     // hsv.v = this.get(channel, 'bri').val;
     const v = this.get(channel, 'bri').val;
     if (v) {
         hsv.v = v;
     }
-    co = Colors.hsv2rgb(hsv);
+    co = hsv2rgb(hsv);
     this.fade(channel, co, transitionTime);
 };
 WifiLight.prototype.temperature = WifiLight.prototype.ct;
@@ -748,9 +750,9 @@ WifiLight.prototype.getRGBStates = function (/* channel */) {
 
 WifiLight.prototype.bri = function (channel, bri, transitionTime) {
     let co = this.getRGBStates(channel);
-    const hsv = Colors.rgb2hsv(co);
+    const hsv = rgb2hsv(co);
     hsv.v = Math.max(Math.min(bri, 100), 0);
-    co = Colors.hsv2rgb(hsv);
+    co = hsv2rgb(hsv);
     this.fade(channel, co, transitionTime);
 };
 
@@ -879,12 +881,13 @@ MiLight.prototype.color = function (channel, rgbw /* , opt */) {
         this.addToQueue(channel, this.cmds._white((rgbw.w * 100 / 255) >> 0));
         return;
     }
-    const hsv = Colors.rgb2hsv(rgbw);
+    const hsv = rgb2hsv(rgbw);
     if (hsv.h === 0 && hsv.v === 0) {
         this.on_off(channel, false);
         return;
     }
     const color = (256 + 176 - Math.floor(Number(hsv.h) / 360.0 * 255.0)) % 256;
+
     this.addToQueue(channel, this.cmds.on);
     this.addToQueue(channel, this.cmds._color(color));
     this.addToQueue(channel, this.cmds._bri(hsv.v));
@@ -992,15 +995,19 @@ function main() {
     checkDeletedDevices((/* err */) => {});
     normalizeConfig(adapter.config);
 
+    const miLight = [];
+
     for (let i = 0; i < adapter.config.devices.length; i++) {
         if (adapter.config.devices[i].type === 'MiLight') {
             for (let zone = 0; zone <= 4; zone++) {
-                new MiLight(adapter.config.devices[i], zone)
-                    .run(() => {});
+                miLight[zone] = new MiLight(adapter.config.devices[i], zone);
+                miLight[zone].run(() => {});
             }
-        } else
-            new WifiLight(adapter.config.devices[i])
-                .run(() => {});
+        } else {
+            const wifiLight = new WifiLight(adapter.config.devices[i]);
+            wifiLight.run(() => {});
+            wifiLight.bri('aaa', 100);
+        }
     }
 
     devices.update();
