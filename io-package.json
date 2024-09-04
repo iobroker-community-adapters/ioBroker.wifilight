@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "1.3.4",
+    "version": "1.3.5",
     "news": {
+      "1.3.5": {
+        "en": "Formatting of the code",
+        "de": "Formatierung des Codes",
+        "ru": "Форматирование кода",
+        "pt": "Formatação do código",
+        "nl": "Opmaak van de code",
+        "fr": "Formatage du code",
+        "it": "Formattazione del codice",
+        "es": "Formato del código",
+        "pl": "Formatowanie kodu",
+        "uk": "Форматування коду",
+        "zh-cn": "代码的格式"
+      },
       "1.3.3": {
         "en": "Just renamed some functions",
         "de": "Nur einige Funktionen umbenannt",
