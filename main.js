@@ -884,7 +884,7 @@ class WifiLight {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class MiLight extends WifiLight {
-    constructor(config, zone /* , cb */) {
+    constructor(config, zone) {
         super(config);
         if (!this.cmds) {
             return;
@@ -892,7 +892,7 @@ class MiLight extends WifiLight {
         this.zone = zone;
         this.cmds = cloneEx(this.cmds);
         this.cmds.setZone(this.zone);
-        this.states = {on: 0, red: 0, green: 0, blue: 0, white: 0};
+        this.states = { on: 0, red: 0, green: 0, blue: 0, white: 0 };
         this.writeTimer = soef.Timer();
         this.isOnline = 'on demand';
     }
@@ -1028,7 +1028,9 @@ function normalizeConfig(config) {
         if (d.pollIntervall === undefined) {
             d.pollIntervall = 30;
         }
+
         d.pollIntervall = parseInt(d.pollIntervall, 10) || 0;
+
         if (d.pollIntervall && d.pollIntervall < 5) {
             d.pollIntervall = 5;
         }
