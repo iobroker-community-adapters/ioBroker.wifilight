@@ -12,6 +12,7 @@ const {
     devices,
     extendAll,
     fullExtend,
+    CDevice,
 } = require('./lib/dontBeSoSoef');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -267,7 +268,7 @@ class WifiLight {
     }
 
     createDevice(cb) {
-        this.dev = new devices.CDevice(0, '');
+        this.dev = new CDevice(0, '', devices);
         this.dev.setDevice(this.config.ip, {
             common: {
                 name: this.config.name,
@@ -278,6 +279,7 @@ class WifiLight {
                 intervall: this.config.pollIntervall,
             },
         });
+
         if (this.zone !== undefined) {
             this.dev.setChannel(this.zone.toString(), ['All Zones', 'Zone 1', 'Zone 2', 'Zone 3', 'Zone 4'][this.zone]);
         }
