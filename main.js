@@ -1076,18 +1076,15 @@ async function main() {
     await checkDeletedDevices();
     await normalizeConfig(adapter.config);
 
-    const miLight = [];
-
     for (let i = 0; i < adapter.config.devices.length; i++) {
         if (adapter.config.devices[i].type === 'MiLight') {
             for (let zone = 0; zone <= 4; zone++) {
-                miLight[zone] = new MiLight(adapter.config.devices[i], zone);
-                miLight[zone].run(() => {
-                });
+                const device = new MiLight(adapter.config.devices[i], zone);
+                device.run();
             }
         } else {
             const wifiLight = new WifiLight(adapter.config.devices[i]);
-            wifiLight.run(() => {});
+            wifiLight.run();
         }
     }
 
