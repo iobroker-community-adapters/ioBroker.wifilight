@@ -139,6 +139,7 @@
     "type": "lighting",
     "messagebox": true,
     "enabled": true,
+    "compact": true,
     "authors": [
       {
         "name": "soef",
@@ -165,8 +166,7 @@
     },
     "dataSource": "push",
     "connectionType": "local",
-    "tier": 2,
-    "compact": true
+    "tier": 2
   },
   "native": {
     "devices": []

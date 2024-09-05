@@ -1,77 +1,84 @@
 ﻿const net = require('node:net');
+const utils = require(`@iobroker/adapter-core`);
+
 const discovery = require('./lib/discovery');
 const { rgb2hsv, roundRGB, ct2rgb, hsv2rgb } = require('./lib/colors');
-const soef = require('./lib/dontBeSoSoef');
+const {
+    Timer,
+    arrayToHex,
+    changeAdapterConfig,
+    clone,
+    delObjectWithStates,
+    devices,
+    extendAll,
+    fullExtend,
+} = require('./lib/dontBeSoSoef');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const wifi = {};
 const debug = false;
+const cmds = require('./lib/devices');
+let adapter = null;
 
-function _fullExtendEx(dest, from) {
-    const props = Object.getOwnPropertyNames(from);
-    let destination;
+extendAll();
 
-    props.forEach(name => {
-        if (typeof from[name] === 'object') {
-            if (typeof dest[name] !== 'object') {
-                dest[name] = {};
-            }
-            _fullExtendEx(dest[name],from[name]);
+function savePrevVersion() {
+    if (!adapter?.ioPack?.common?.version) {
+        return;
+    }
+    const id = `system.adapter.${adapter.namespace}`;
+    const vid = `${id}.prevVersion`;
+
+    adapter.getForeignObject(vid, (err, obj) => {
+        if (err || !obj) {
+            adapter.setForeignObject(vid, {
+                type: 'state',
+                common: { name: 'version', role: 'indicator.state', desc: 'version check for updates', type: 'string' },
+                native: {}
+            }, () => {
+                adapter.setForeignState(vid, { val: adapter.ioPack.common.version, ack: true, from: id });
+            });
         } else {
-            destination = Object.getOwnPropertyDescriptor(from, name);
-            Object.defineProperty(dest, name, destination);
+            adapter.setForeignState(vid, { val: adapter.ioPack.common.version, ack: true, from: id });
         }
     });
 }
 
-function fullExtendEx(dest, from) {
-    _fullExtendEx(dest, from);
-    return dest;
+function parseIntVersion(versionString) {
+    if (!versionString) {
+        return 0;
+    }
+    const ar = versionString.toString().split('.');
+    let iVer = 0;
+    for (let i = 0; i < ar.length; i++) {
+        iVer *= 1000;
+        iVer += ar[i] >> 0;
+    }
+    return iVer;
 }
 
-function cloneEx(from) {
-    const props = Object.getOwnPropertyNames(from);
-    let destination;
-    const dest = {};
+function checkIfUpdated(callback) {
+    if (!adapter) {
+        if (typeof callback === 'function') {
+            callback();
+        }
+        return;
+    }
 
-    props.forEach(function (name) {
-        if (from[name] instanceof Array) {
-            //dest[name] = new Array(from[name]);
-            dest[name] = [].concat(from[name]);
-        } else if (typeof from[name] === 'object') {
-            if (typeof dest[name] !== 'object') {
-                dest[name] = {};
-            }
-            _fullExtendEx(dest[name],from[name]);
-        } else {
-            destination = Object.getOwnPropertyDescriptor(from, name);
-            Object.defineProperty(dest, name, destination);
+    const id = `system.adapter.${adapter.namespace}`;
+    const vid = `${id}.prevVersion`;
+    adapter.getForeignState(vid, (err, state)=>  {
+        const aktVersion = parseIntVersion(adapter.ioPack.common.version);
+        const prevVersion = parseIntVersion(state ? state.val || '0' : '0');
+        if (prevVersion < aktVersion) {
+            savePrevVersion();
+        }
+        if (typeof callback === 'function') {
+            callback();
         }
     });
-    return dest;
 }
-
-function arrayToHexEx(ar, len) {
-    const s = [];
-    if (len === undefined) {
-        len = ar.length;
-    }
-    for (let i = 0; i < len; i++) {
-        s.push(ar[i].toString(16).padStart(2, '0'));
-    }
-    return s.join(' ');
-}
-
-soef.extendAll();
-
-const adapter = soef.Adapter(
-    main,
-    onStateChange,
-    onMessage,
-    onUnload,
-    { name: 'wifilight' },
-);
 
 function fromDeviceName(name) {
     return cmds.knownDeviceNames[name] || cmds.knownDeviceNames[name.toUpperCase()];
@@ -115,22 +122,19 @@ function onMessage(obj) {
 }
 
 function onUnload(callback) {
-    Object.keys(wifi).forEach(v => {
-        wifi[v].close();
-        delete wifi[v];
-        adapter.log.debug(`unload: ${v}`);
-    });
+    try {
+        Object.keys(wifi).forEach(v => {
+            wifi[v].close();
+            delete wifi[v];
+            adapter.log.debug(`unload: ${v}`);
+        });
+    } catch {
+        // ignore
+    }
     callback && callback();
 }
 
-// process.on('exit', function() {
-//     if (adapter &&adapter.log) adapter.log.info('on process exit');
-//     console.log('on process exit');
-// });
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const cmds = require('./lib/devices');
 
 const usedStateNames = {
     online:      { n: 'reachable', g: 1, val: false, common: { write: false, type: 'boolean', role: 'indicator.reachable' }},
@@ -180,8 +184,10 @@ function parseHexColors(val) {
 }
 
 function onStateChange(id, state) {
+    if (!state || state.ack) {
+        return;
+    }
     const ar = id.split('.');
-    // const dcs = adapter.idToDCS(id);
     let deviceName = ar[2];
     let channelName = '';
     if (ar.length > 4) {
@@ -200,16 +206,30 @@ function onStateChange(id, state) {
     device.onStateChange(channelName, stateName, state.val);
 }
 
+function startAdapter() {
+    adapter = utils.Adapter({
+        name: 'wifilight',
+        message: obj => onMessage(obj),
+        objectChange: (id, obj) => id && !obj && devices?.removeWithoutNameSpace(id),
+        ready: () => checkIfUpdated(() => devices.init(adapter, () => main())),
+        stateChange: (id, state) => onStateChange(id, state),
+        unload: (callback) => onUnload(callback),
+    });
+
+    return adapter;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class WifiLight {
     constructor(config) {
         if (!config) {
             throw new Error('no configuration');
         }
+        this.zone = undefined;
         this.config = config;
         this.isOnline = false;
         this.cmds = cmds[config.type];
-        this.prgTimer = soef.Timer();
+        this.prgTimer = new Timer();
     }
 
     run(cb) {
@@ -272,16 +292,17 @@ class WifiLight {
             if ((j === 'progNo' || j === 'disco') && this.cmds.programNames) {
                 st.common.states = this.cmds.programNames;
             }
-            // eslint-ignore-next-line
+            // eslint-disable-next-line no-bitwise
             if (st.g & this.cmds.g) {
                 this.dev.createNew(st.n, st);
             }
         }
+
         devices.update(cb);
     }
 
     onStateChange(channel, stateName, val) {
-        let transitionTime = this.getval(channel, usedStateNames.transition.n, 0);
+        let transitionTime = this.getValue(channel, usedStateNames.transition.n, 0);
         this.clearQueue();
         let co;
         switch (stateName) {
@@ -332,7 +353,7 @@ class WifiLight {
                 let speed;
                 if (typeof val === 'string') {
                     let ar = val.split(' ');
-                    if (!ar || ar.lengt < 2) {
+                    if (!ar || ar.length < 2) {
                         ar = val.split(',');
                     }
                     if (ar && ar.length >= 2) {
@@ -340,9 +361,8 @@ class WifiLight {
                         val = parseInt(ar[0]);
                     }
                 } else {
-                    speed = this.getval(channel, usedStateNames.progSpeed.n, 30);
+                    speed = this.getValue(channel, usedStateNames.progSpeed.n, 30);
                 }
-                // if (this.cmds._setProgNo) _setProgNo(this, channel, val >> 0); else
                 this.addToQueue(channel, this.cmds.progNo, val >> 0, speed);
                 break;
             }
@@ -401,7 +421,7 @@ class WifiLight {
                         this.states.white = 0;
                     }
                 }
-                const o = fullExtendEx(this.getRGBStates(channel), colors);
+                const o = fullExtend(this.getRGBStates(channel), colors);
                 adapter.log.debug(JSON.stringify(o));
                 if (o.x !== undefined) {
                     transitionTime = o.x >> 0;
@@ -560,9 +580,9 @@ class WifiLight {
         return this.dev.get(channel, state);
     }
 
-    getval(channel, state, def) {
+    getValue(channel, state, def) {
         const o = this.dev.get(channel, state);
-        if (o && o.val !== undefined) {
+        if (o?.val !== undefined) {
             return o.val;
         }
         return def;
@@ -575,6 +595,12 @@ class WifiLight {
             clearTimeout(this.writeTimeout);
             this.writeTimeout = null;
         }
+
+        if (this.writeTimer) {
+            clearTimeout(this.writeTimer);
+            this.writeTimer = null;
+        }
+
         if (this.onTimerObject) {
             clearTimeout(this.onTimerObject);
             this.onTimerObject = null;
@@ -597,7 +623,8 @@ class WifiLight {
 
     setOnline(val) {
         this.isOnline = val;
-        if ((this.cmds.g & usedStateNames.online.g) === 0) {
+        // eslint-disable-next-line no-bitwise
+        if (!(this.cmds.g & usedStateNames.online.g)) {
             return;
         }
         this.dev.set(usedStateNames.online.n, val);
@@ -634,7 +661,7 @@ class WifiLight {
         }
         //const s = buf.inspect();
         //this.log('writing: ' + buf.toString('hex').match(/.{2}/g).join(' '));
-        this.log(`write: ${arrayToHexEx(buf)}`);
+        this.log(`write: ${arrayToHex(buf)}`);
         if (!this.isOnline /*&& !this.USE_SOCKET_ONCE*/) {
             this.reconnect(() => this._write(buf, cb), 0);
             return;
@@ -761,7 +788,7 @@ class WifiLight {
         dif.w /= maxSteps;
 
         const steps = maxSteps;
-        const delay = parseInt(transitionTime * 100 / maxSteps);
+        const delay = Math.round(transitionTime * 100 / maxSteps);
 
         for (let i = 0; i < steps; i++) {
             co.r += dif.r;
@@ -790,10 +817,6 @@ class WifiLight {
         }
         co = hsv2rgb(hsv);
         this.fade(channel, co, transitionTime);
-    }
-
-    temperature(channel, temp, transitionTime) {
-        return this.ct(channel, temp, transitionTime);
     }
 
     getRGBStates(/* channel */) {
@@ -833,7 +856,7 @@ class WifiLight {
     onData(data) {
         if (adapter.common.loglevel === 'debug') {
             adapter.log.debug(`raw data length: ${data.length}`);
-            adapter.log.debug(`raw data: ${arrayToHexEx(data)}`);
+            adapter.log.debug(`raw data: ${arrayToHex(data)}`);
         }
         const newPos = this.dataBuffer.pos + data.length;
         if (newPos > this.dataBuffer.length) {
@@ -851,7 +874,7 @@ class WifiLight {
 
         while (this.dataBuffer.pos >= this.cmds.responseLen || this.dataBuffer.pos >= this.cmds.responseLen2) {
             const [lengthRead, states] = this.cmds.decodeResponse(this.dataBuffer);
-            this.log(`onData: raw: ${arrayToHexEx(this.dataBuffer, lengthRead)}`);
+            this.log(`onData: raw: ${arrayToHex(this.dataBuffer, lengthRead)}`);
             this.dataBuffer.copyWithin(0, lengthRead, this.dataBuffer.pos);
             this.dataBuffer.pos -= lengthRead;
             if (!states) {
@@ -869,9 +892,9 @@ class WifiLight {
                 this.dev.set(usedStateNames.progOn.n, this.states.progOn);
                 this.dev.set(usedStateNames.progSpeed.n, this.states.progSpeed);
                 this.dev.set(usedStateNames.white.n, this.states.white);
-                let rgb = `#${this.states.red.toHex()}${this.states.green.toHex()}${this.states.blue.toHex()}`;
+                let rgb = `#${this.states.red.toString(16).padStart(2, '0')}${this.states.green.toString(16).padStart(2, '0')}${this.states.blue.toString(16).padStart(2, '0')}`;
                 if (this.states.white !== undefined) {
-                    rgb += this.states.white.toHex();
+                    rgb += this.states.white.toString(16).padStart(2, '0');
                 }
                 this.dev.set(usedStateNames.rgb.n, rgb);
                 devices.update();
@@ -890,10 +913,10 @@ class MiLight extends WifiLight {
             return;
         }
         this.zone = zone;
-        this.cmds = cloneEx(this.cmds);
+        this.cmds = clone(this.cmds);
         this.cmds.setZone(this.zone);
         this.states = { on: 0, red: 0, green: 0, blue: 0, white: 0 };
-        this.writeTimer = soef.Timer();
+        this.writeTimer = null;
         this.isOnline = 'on demand';
     }
 
@@ -910,7 +933,7 @@ class MiLight extends WifiLight {
                     this.client.setBroadcast(true);
                 }
             });
-            this.client.on('message', (/* data, rinfo */) => {});
+            this.client.on('message', (/* data, rInfo */) => {});
             this.client.on('error', (/* error */) => {});
             this.client.on('close', (/* error */) => {
                 this.client = null;
@@ -919,7 +942,10 @@ class MiLight extends WifiLight {
         }
 
         this.client.send(data, 0, data.length, this.config.port, this.config.ip, (/* error, bytes */) => {
-            this.writeTimer.set(() => this?.client?.close(), 2000);
+            this.writeTimer = setTimeout(() => {
+                this.writeTimer = null;
+                this?.client?.close();
+            }, 2000);
             cb && cb();
         });
     }
@@ -965,7 +991,7 @@ class MiLight extends WifiLight {
                     this.addToQueue(channel, this.cmds.off);
                     return;
                 }
-                // const bri = this.getval(channel, 'bri');
+                // const bri = this.getValue(channel, 'bri');
                 let cmd = this.cmds._white(10).cc(this.cmds.on);
                 while (val--) {
                     cmd = cmd.cc(this.cmds.discoMode);
@@ -990,13 +1016,13 @@ function checkDeletedDevices(cb) {
         res.forEach(obj => {
             const ar = obj._id.split('.');
             const ip = ar[2].replace(reIp, '.');
-            const found = adapter.config.devices.find(v => v.ip === ip); // xxxx
+            const found = adapter.config.devices.find(v => v.ip === ip);
             if (!found) {
                 toDelete.push(obj._id);
             }
         });
 
-        toDelete.forEachCallback((next, id) => dcs.del(id, next), cb);
+        toDelete.forEachCallback((next, id) => delObjectWithStates(id, next), cb);
     });
 }
 
@@ -1041,7 +1067,7 @@ function normalizeConfig(config) {
         });
     });
     if (changed) {
-        soef.changeAdapterConfig(adapter, conf => conf.devices = config.devices);
+        changeAdapterConfig(adapter, conf => conf.devices = config.devices);
     }
 }
 
@@ -1069,4 +1095,12 @@ function main() {
 
     devices.update();
     adapter.subscribeStates('*');
+}
+
+// If started as allInOne mode => return function to create instance
+if (module.parent) {
+    module.exports = startAdapter;
+} else {
+    // or start the instance directly
+    startAdapter();
 }
