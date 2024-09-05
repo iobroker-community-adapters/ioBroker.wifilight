@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "1.3.5",
+    "version": "2.0.0",
     "news": {
+      "2.0.0": {
+        "en": "The adapter was completely refactored\nAdded compact mode\nJSON config GUI added",
+        "de": "Der Adapter wurde komplett überarbeitet\nKompakter Modus\nJSON config GUI hinzugefügt",
+        "ru": "Адаптер был полностью рефакторирован\nДобавить компактный режим\nJSON config GUI добавлен",
+        "pt": "O adaptador foi completamente refactored\nAdicionado modo compacto\nJSON config GUI adicionado",
+        "nl": "De adapter was volledig gerefactoreerd\nCompacte modus toegevoegd\nJSON config GUI toegevoegd",
+        "fr": "L'adaptateur a été complètement refacturé\nAjout du mode compact\nJSON config GUI ajouté",
+        "it": "L'adattatore è stato completamente rifatto\nAggiunta modalità compatta\nJSON config GUI aggiunto",
+        "es": "El adaptador fue completamente refactorizado\nModo compacto\nJSON config GUI agregó",
+        "pl": "Adapter został całkowicie zrefakturowany\nDodano tryb kompaktowy\nDodano GUI konfiguracyjny JSON",
+        "uk": "Адаптер повністю рефакторований\nДодано компактний режим\nJSON config GUI додано",
+        "zh-cn": "适配器已完全重构\n添加紧凑模式\n添加 JSON 配置图形界面"
+      },
       "1.3.5": {
         "en": "Formatting of the code",
         "de": "Formatierung des Codes",
@@ -80,19 +93,6 @@
         "pl": "Zaktualizowano zależności",
         "uk": "Залежність було оновлено",
         "zh-cn": "依赖关系已更新"
-      },
-      "1.2.0": {
-        "en": "Adapter requires node.js 18 and js-controller >= 5 now\nDependencies have been updated",
-        "de": "Adapter benötigt node.js 18 und js-controller >= 5 jetzt\nAbhängigkeiten wurden aktualisiert",
-        "ru": "Адаптер требует node.js 18 и js-controller >= 5 сейчас\nЗависимость обновлена",
-        "pt": "Adapter requer node.js 18 e js-controller >= 5 agora\nAs dependências foram atualizadas",
-        "nl": "Adapter vereist node.js 18 en js-controller Nu 5\nAfhankelijkheden zijn bijgewerkt",
-        "fr": "Adaptateur nécessite node.js 18 et js-controller >= 5 maintenant\nLes dépendances ont été actualisées",
-        "it": "Adattatore richiede node.js 18 e js-controller >= 5 ora\nLe dipendenze sono state aggiornate",
-        "es": "Adaptador requiere node.js 18 y js-controller √= 5 ahora\nSe han actualizado las dependencias",
-        "pl": "Adapter wymaga node.js 18 i sterownika js- > = 5 teraz\nZaktualizowano zależności",
-        "uk": "Адаптер вимагає node.js 18 і js-controller >= 5 тепер\nЗалежність було оновлено",
-        "zh-cn": "适配器需要节点.js 18和js控制器 QQ 现在5号\n依赖关系已更新"
       }
     },
     "titleLang": {
