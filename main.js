@@ -1007,7 +1007,7 @@ class MiLight extends WifiLight {
 async function checkDeletedDevices() {
     const res = await adapter.getDevicesAsync();
     if (!res?.length) {
-        return
+        return;
     }
     const reIp = /[^0-9]/g;
     const toDelete = [];
