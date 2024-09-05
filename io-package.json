@@ -162,7 +162,7 @@
       }
     },
     "adminUI": {
-      "config": "html"
+      "config": "json"
     },
     "dataSource": "push",
     "connectionType": "local",

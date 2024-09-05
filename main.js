@@ -104,7 +104,50 @@ function onMessage(obj) {
                 if (obj.callback) {
                     adapter.sendTo(obj.from, obj.command, JSON.stringify(result), obj.callback);
                 }
+            },
+        );
+    } else if (obj.command === 'discoveryJson' && obj.callback) {
+        // extract devices
+        let _devices;
+        try {
+            if (typeof obj.message === 'string') {
+                _devices = JSON.parse(obj.message);
+            } else {
+                _devices = obj.message?.devices || [];
             }
+        } catch {
+            // ignore
+        }
+
+        _devices = _devices || [];
+
+        discovery.scanForAllDevices(
+            entry => {
+                const ret = _devices.find(e => e.ip === entry.ip);
+                if (!ret) {
+                    const dev = fromDeviceName(entry.name);
+                    entry.type = dev ? dev.type : '';
+                    entry.port = dev?.port ? dev.port : 5577;
+                    entry.pollIntervall = 30;
+                    return true;
+                }
+                // device already exists
+                return false;
+            },
+            result => {
+                let found = false;
+                result.forEach(e => {
+                    if (!_devices.find(d => d.ip === e.ip)) {
+                        _devices.push(e);
+                        found = true;
+                    }
+                });
+                if (found) {
+                    adapter.sendTo(obj.from, obj.command, { native: { devices: _devices }}, obj.callback);
+                } else {
+                    adapter.sendTo(obj.from, obj.command, { error: 'Cannot find any device' }, obj.callback);
+                }
+            },
         );
     } else {
         adapter.log.warn(`Unknown command: ${obj.command}`);

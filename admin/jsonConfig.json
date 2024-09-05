@@ -1,0 +1,90 @@
+{
+    "i18n": true,
+    "type": "panel",
+    "items": {
+        "_discovery": {
+            "type": "sendTo",
+            "command": "discoveryJson",
+            "jsonData": "{ \"devices\": ${JSON.stringify(data.devices)} }",
+            "useNative": true,
+            "showProcess": true,
+            "icon": "search",
+            "variant": "contained",
+            "label": "Discover devices"
+        },
+        "devices": {
+            "newLine": true,
+            "type": "table",
+            "sm": 12,
+            "xs": 12,
+            "items": [
+                {
+                    "attr": "name",
+                    "type": "text",
+                    "title": "Name"
+                },
+                {
+                    "attr": "ip",
+                    "type": "text",
+                    "title": "IP Address"
+                },
+                {
+                    "attr": "type",
+                    "type": "select",
+                    "title": "Type",
+                    "noTranslation": true,
+                    "options": [
+                        {
+                            "value": "MiLightW",
+                            "label": "MiLightW"
+                        },
+                        {
+                            "value": "LW12",
+                            "label": "LW12"
+                        },
+                        {
+                            "value": "LD382A",
+                            "label": "LD382A"
+                        },
+                        {
+                            "value": "LD686",
+                            "label": "LD686"
+                        },
+                        {
+                            "value": "LD382",
+                            "label": "LD382"
+                        },
+                        {
+                            "value": "UFO",
+                            "label": "UFO"
+                        },
+                        {
+                            "value": "MiLight",
+                            "label": "MiLight"
+                        },
+                        {
+                            "value": "MiLightRGB",
+                            "label": "MiLightRGB"
+                        }
+                    ]
+                },
+                {
+                    "attr": "port",
+                    "type": "number",
+                    "min": 0,
+                    "max": 65600,
+                    "title": "Port",
+                    "width": 100
+                },
+                {
+                    "attr": "pollIntervall",
+                    "type": "number",
+                    "min": 5,
+                    "max": 600,
+                    "title": "Poll interval (sec)",
+                    "width": 200
+                }
+            ]
+        }
+    }
+}

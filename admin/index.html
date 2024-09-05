@@ -64,10 +64,13 @@
             devices = settings.devices || [{name: '', ip: "", type: "", port: ""}];
             editTable({
                 tabId: 'devices',
-                cols: [{name: 'name', width: '70'}, {name: 'ip', width: 70}, {name: 'type', width: 40}, {
-                    name: 'port',
-                    width: '40'
-                }, {name: 'pollIntervall', with: '15'}],
+                cols: [
+                    {name: 'name', width: '70'},
+                    {name: 'ip', width: 70},
+                    {name: 'type', width: 40},
+                    {name: 'port', width: '40'},
+                    {name: 'pollIntervall', width: '15'},
+                ],
                 values: devices,
                 top: 400,
                 title: 'Devices'
