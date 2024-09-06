@@ -12,6 +12,7 @@ const {
     devices,
     fullExtend,
     CDevice,
+    compareArrays,
 } = require('./lib/dontBeSoSoef');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -494,7 +495,11 @@ class WifiLight {
 
         function doIt() {
             if (self.queue.length > 0) {
-                setTimeout(doIt, self.queue.length * 2);
+                this.doItTimeout && clearTimeout(this.doItTimeout);
+                this.doItTimeout = setTimeout(() => {
+                    this.doItTimeout = null;
+                    doIt();
+                }, self.queue.length * 2);
                 return;
             }
             if (++i >= cmds.length) {
@@ -532,10 +537,13 @@ class WifiLight {
             timeout = cb;
             cb = undefined;
         }
-        if (this.client) {
-            this.destroyClient();
-            setTimeout(() => this.start(cb), timeout === undefined ? 5000 : timeout);
-        }
+
+        this.destroyClient();
+
+        this.reconnectTimeout = this.reconnectTimeout || setTimeout(() => {
+            this.reconnectTimeout = null;
+            this.start(cb);
+        }, timeout === undefined ? 5000 : timeout);
     }
 
     _write(data, cb) {
@@ -559,15 +567,15 @@ class WifiLight {
             this.log(`onClose ${ts}hasError=${hasError} client=${this.config.ip}:${this.config.port}`);
         });
         this.client.on('error', error => {
-            const ts = debug ? `(${Math.round((Date.now() - this.ts) / 1000)} sec) ` : '';
-
-            this.log(`onError: ${ts}${error.code !== undefined ? error.code : ''} ${error.message}`);
-
-            switch (error.code) { //error.code
+            switch (error.code) {
                 case 'ECONNRESET':
                 case 'ETIMEDOUT':
                 case 'EPIPE':
+                    adapter.log.warn(`[${this.config.ip}] onError: ${error.code} ${error.message} - reconnecting in 5 sec...`);
                     this.reconnect(5000);
+                    break;
+                default:
+                    adapter.log.error(`[${this.config.ip}] onError: ${error.code} ${error.message} - will not be reconnected`);
                     break;
             }
             this.setOnline(false);
@@ -591,6 +599,34 @@ class WifiLight {
             clearTimeout(this.updateTimer);
             this.updateTimer = null;
         }
+
+        if (this.doItTimeout) {
+            clearTimeout(this.doItTimeout);
+            this.doItTimeout = null;
+        }
+
+        if (this.writeTimeout) {
+            clearTimeout(this.writeTimeout);
+            this.writeTimeout = null;
+        }
+
+        if (this.writeTimer) {
+            clearTimeout(this.writeTimer);
+            this.writeTimer = null;
+        }
+
+        if (this.onTimerObject) {
+            clearTimeout(this.onTimerObject);
+            this.onTimerObject = null;
+        }
+
+        if (this.reconnectTimeout) {
+            clearTimeout(this.reconnectTimeout);
+            this.reconnectTimeout = null;
+        }
+
+        this.prgTimer.clear();
+
         if (this.client) {
             this.client.destroy();
             this.client = null;
@@ -630,21 +666,6 @@ class WifiLight {
     close() {
         this.clearQueue();
         this.destroyClient();
-        if (this.writeTimeout) {
-            clearTimeout(this.writeTimeout);
-            this.writeTimeout = null;
-        }
-
-        if (this.writeTimer) {
-            clearTimeout(this.writeTimer);
-            this.writeTimer = null;
-        }
-
-        if (this.onTimerObject) {
-            clearTimeout(this.onTimerObject);
-            this.onTimerObject = null;
-        }
-        this.prgTimer.clear();
     }
 
     runUpdateTimer() {
@@ -781,7 +802,7 @@ class WifiLight {
             if (!(akt.inProcess || (!akt.ctrl && akt.ts && akt.ts < Date.now()))) {
                 break;
             }
-            if (this.queue.length <= 1 && !akt.cmd.eq(this.cmds.statusRequest)) {
+            if (this.queue.length <= 1 && !compareArrays(akt.cmd, this.cmds.statusRequest)) {
                 this.directRefresh(akt.channel);
             }
             this.queue.shift();

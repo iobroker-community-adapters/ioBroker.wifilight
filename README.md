@@ -51,6 +51,9 @@ For example, `red = 0`, blue and green will stay unchanged.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (bluefox) Corrected error with array comparison
+
 ### 2.0.0 (2024-09-05)
 * (bluefox) The adapter was completely refactored
 * (bluefox) Added compact mode
