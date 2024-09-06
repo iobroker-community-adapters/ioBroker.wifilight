@@ -22,14 +22,14 @@ const devices = {
     MiLightRGB,
 };
 
-function string2Buffer(str) {
-    const arr = str.split(' ');
-    const buffer = Buffer.alloc(arr.length);
-    for (let i = 0; i < arr.length; i++) {
-        buffer[i] = parseInt(arr[i], 16);
-    }
-    return buffer;
-}
+// function string2Buffer(str) {
+//     const arr = str.split(' ');
+//     const buffer = Buffer.alloc(arr.length);
+//     for (let i = 0; i < arr.length; i++) {
+//         buffer[i] = parseInt(arr[i], 16);
+//     }
+//     return buffer;
+// }
 
 function findCommand(device, receivedData) {
     return Object.keys(device).find(key => {
@@ -66,14 +66,19 @@ const state = {
     progNo: 1,
     speed: 5,
     progOn: false,
-}
+};
+const sockets = {};
+let nextSocketId = 0;
 
 // Create a TCP server
 const server = net.Server();
 server.on('connection', socket => {
-    console.log('Client connected');
+    const socketId = nextSocketId++;
+    console.log('Client connected with id', socketId);
+    sockets[nextSocketId] = socket;
 
     socket.on('close', () => {
+        delete sockets[nextSocketId];
         console.log('Client disconnected');
     });
 
@@ -81,7 +86,7 @@ server.on('connection', socket => {
         console.log(`Client data: ${data.map(byte => byte.toString(16)).join(' ')}`);
         // find command
         let cmd;
-        const dev = Object.keys(devices).find(device => {
+        Object.keys(devices).find(device => {
             cmd = findCommand(devices[device], data);
             if (cmd) {
                 console.log(`Found command for ${device}: "${cmd}"`);
@@ -142,7 +147,7 @@ async function startServer(defaultState) {
             Object.assign(state, defaultState);
         }
         server.listen(5577, '127.0.0.1', () => {
-            console.log('Server started');
+            console.log(`Server started on port 5577: ${JSON.stringify(state)}`);
             resolve();
         });
     });
@@ -155,6 +160,11 @@ async function stopServer() {
                 console.log('Server closed');
                 resolve();
             });
+            // Destroy all open sockets
+            for (const socketId in sockets) {
+                console.log('socket', socketId, 'destroyed');
+                sockets[socketId].destroy();
+            }
         } else {
             resolve();
         }

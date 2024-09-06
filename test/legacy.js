@@ -1,6 +1,3 @@
-/* jshint -W097 */
-/* jshint strict: false */
-/* jslint node: true */
 const expect = require('chai').expect;
 const setup = require('@iobroker/legacy-testing');
 const { startServer, stopServer } = require('./simulate');
@@ -46,6 +43,38 @@ function checkValueOfState(id, value, cb, counter) {
     });
 }
 
+function checkValueOfStateAsync(id, value) {
+    return new Promise((resolve, reject) =>
+        checkValueOfState(id, value, error =>
+            error ? reject(error) : resolve()));
+}
+
+function checkValueOfStateAcknowledged(id, value, cb, counter) {
+    counter = counter || 0;
+    if (counter > 20) {
+        return cb && cb(`Cannot check value Of State ${id}`);
+    }
+
+    states.getState(id, (err, state) => {
+        err && console.error(err);
+        if (value === null && !state) {
+            cb && cb();
+        } else if (state && state.ack && (value === undefined || state.val === value)) {
+            cb && cb();
+        } else {
+            setTimeout(() => checkValueOfState(id, value, cb, counter + 1), 500);
+        }
+    });
+}
+
+function checkValueOfStateAcknowledgedAsync(id, value) {
+    return new Promise((resolve, reject) =>
+        checkValueOfStateAcknowledged(id, value, error =>
+            error ? reject(error) : resolve()));
+}
+
+const deviceState = { r: 10, g: 20, b: 30, w: 50, progOn: false, on: true };
+
 describe(`Test ${adapterShortName} adapter`, function () {
     before(`Test ${adapterShortName} adapter: Start js-controller`, function (_done) {
         this.timeout(600000); // because of first install from npm
@@ -58,6 +87,7 @@ describe(`Test ${adapterShortName} adapter`, function () {
 
             config.native.devices   = [
                 {
+                    type: 'LD382A',
                     ip: '127.0.0.1',
                     port: 5577,
                     name: 'LD382A',
@@ -67,7 +97,8 @@ describe(`Test ${adapterShortName} adapter`, function () {
 
             await setup.setAdapterConfig(config.common, config.native);
 
-            startServer({ r: 10, g: 20, b: 30, w: 50, progOn: false, on: true })
+            // start wifilight device with predefined values
+            startServer(deviceState)
                 .then(() => {
                     setup.startController(
                         true,
@@ -83,60 +114,44 @@ describe(`Test ${adapterShortName} adapter`, function () {
     });
 
     it(`Test ${adapterShortName} adapter: Check if adapter started`, function (done) {
-        this.timeout(60000);
         checkConnectionOfAdapter(res => {
             res && console.log(res);
             expect(res).not.to.be.equal('Cannot check connection');
-            objects.setObject('system.adapter.test.0', {
-                common: {
-
-                },
-                type: 'instance'
-            },
-            () => {
-                states.subscribeMessage('system.adapter.test.0');
-                done();
-            });
+            done();
         });
-    });
+    }).timeout(60000);
 
-    it(`Test ${adapterShortName} adapter: Check predefined states`, function (done) {
-        this.timeout(10000);
-        checkValueOfState(`${adapterShortName}.0.127_0_0_1.0.r`, 10, () => {
-            checkValueOfState(`${adapterShortName}.0.127_0_0_1.0.g`, 20, () => {
-                checkValueOfState(`${adapterShortName}.0.127_0_0_1.0.b`, 30, () => {
-                    checkValueOfState(`${adapterShortName}.0.127_0_0_1.0.w`, 50, () => {
-                        checkValueOfState(`${adapterShortName}.0.127_0_0_1.0.progOn`, false, () => {
-                            checkValueOfState(`${adapterShortName}.0.127_0_0_1.0.on`, true, () => {
-                                done();
-                            });
-                        });
-                    });
-                });
-            });
-        });
-    });
+    it(`Test ${adapterShortName} adapter: Check predefined states`, async () => {
+        await checkValueOfStateAsync(`${adapterShortName}.0.127_0_0_1.r`, deviceState.r);
+        await checkValueOfStateAsync(`${adapterShortName}.0.127_0_0_1.g`, deviceState.g);
+        await checkValueOfStateAsync(`${adapterShortName}.0.127_0_0_1.b`, deviceState.b);
+        await checkValueOfStateAsync(`${adapterShortName}.0.127_0_0_1.w`, deviceState.w);
+        await checkValueOfStateAsync(`${adapterShortName}.0.127_0_0_1.progOn`, deviceState.progOn);
+        await checkValueOfStateAsync(`${adapterShortName}.0.127_0_0_1.on`, deviceState.on);
+        await checkValueOfStateAsync(`${adapterShortName}.0.127_0_0_1.reachable`, true);
+    }).timeout(10000);
 
-    it(`Test ${adapterShortName} adapter: test control`, function (done) {
-        this.timeout(10000);
-        onStateChanged = (id, state) => {
-            if (id === `${adapterShortName}.0.127_0_0_1.0.r`) {
-                expect(state.val).to.be.equal(20);
-                done();
-            }
-        };
-        states.setState(`${adapterShortName}.0.127_0_0_1.0.r`, 20, true);
-    });
+    it(`Test ${adapterShortName} adapter: test control`, async () => {
+        deviceState.r = 80;
+        states.setState(`${adapterShortName}.0.127_0_0_1.r`, deviceState.r, true);
+        await checkValueOfStateAcknowledgedAsync(`${adapterShortName}.0.127_0_0_1.r`, deviceState.r);
+        await checkValueOfStateAcknowledgedAsync(
+            `${adapterShortName}.0.127_0_0_1.rgb`,
+            `#${deviceState.r.toString(16).padStart(2, '0')}${deviceState.g.toString(16).padStart(2, '0')}${deviceState.b.toString(16).padStart(2, '0')}${deviceState.w.toString(16).padStart(2, '0')}`,
+        );
+    }).timeout(10000);
+
+    it(`Test ${adapterShortName} adapter: test reachable`, async () => {
+        await stopServer();
+        checkValueOfStateAcknowledged(`${adapterShortName}.0.127_0_0_1.reachable`, false);
+    }).timeout(10000);
 
     after(`Test ${adapterShortName} adapter: Stop js-controller`, function (done) {
         this.timeout(10000);
 
         setup.stopController(normalTerminated => {
-            stopServer()
-                .then(() => {
-                    console.log(`Adapter normal terminated: ${normalTerminated}`);
-                    done();
-                });
+            console.log(`Adapter normal terminated: ${normalTerminated}`);
+            done();
         });
     });
 });
