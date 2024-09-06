@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "news": {
+      "2.0.1": {
+        "en": "Corrected error with array comparison\nAdded tests",
+        "de": "Fehler behoben mit Array-Vergleich\nZusätzliche Tests",
+        "ru": "Исправленная ошибка с сопоставлением массива\nДобавленные испытания",
+        "pt": "Erro corrigido com comparação de array\nTestes adicionados",
+        "nl": "Gecorrigeerde fout met arrayvergelijking\nToegevoegde tests",
+        "fr": "Erreur corrigée avec comparaison de tableau\nEssais ajoutés",
+        "it": "Errore corretto con confronto array\nProve aggiuntive",
+        "es": "Error corregido con comparación de array\nPruebas adicionales",
+        "pl": "Skorygowany błąd z porównywaniem tablic\nDodano badania",
+        "uk": "Виправлена помилка з порівнянням масиву\nДодані тести",
+        "zh-cn": "与数组比较校正错误\n添加的测试"
+      },
       "2.0.0": {
         "en": "The adapter was completely refactored\nAdded compact mode\nJSON config GUI added",
         "de": "Der Adapter wurde komplett überarbeitet\nKompakter Modus\nJSON config GUI hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "Popraw zależność kontrolera js-",
         "uk": "Виправлення залежності js-controller",
         "zh-cn": "修复js控制器依赖性"
-      },
-      "1.2.1": {
-        "en": "Dependencies have been updated",
-        "de": "Abhängigkeiten wurden aktualisiert",
-        "ru": "Зависимость обновлена",
-        "pt": "As dependências foram atualizadas",
-        "nl": "Afhankelijkheden zijn bijgewerkt",
-        "fr": "Les dépendances ont été actualisées",
-        "it": "Le dipendenze sono state aggiornate",
-        "es": "Se han actualizado las dependencias",
-        "pl": "Zaktualizowano zależności",
-        "uk": "Залежність було оновлено",
-        "zh-cn": "依赖关系已更新"
       }
     },
     "titleLang": {
