@@ -53,6 +53,7 @@ For example, `red = 0`, blue and green will stay unchanged.
 -->
 ### **WORK IN PROGRESS**
 * (bluefox) Corrected error with array comparison
+* (bluefox) Added tests
 
 ### 2.0.0 (2024-09-05)
 * (bluefox) The adapter was completely refactored
