@@ -570,6 +570,7 @@ class WifiLight {
             switch (error.code) {
                 case 'ECONNRESET':
                 case 'ETIMEDOUT':
+                case 'EHOSTUNREACH':
                 case 'EPIPE':
                     adapter.log.warn(`[${this.config.ip}] onError: ${error.code} ${error.message} - reconnecting in 5 sec...`);
                     this.reconnect(5000);
