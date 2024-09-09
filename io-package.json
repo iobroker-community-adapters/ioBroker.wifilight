@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "news": {
+      "2.0.2": {
+        "en": "Trying to reconnect after the EHOSTUNREACH error code",
+        "de": "Versuchen, nach dem EHOSTUNREACH-Fehlercode wiederzuschalten",
+        "ru": "Попытка повторного подключения после кода ошибки EHOSTUNREACH",
+        "pt": "Tentando se reconectar após o código de erro EHOSTUNREACH",
+        "nl": "Proberen opnieuw verbinding na de EHOSTUNREACH foutcode",
+        "fr": "Essayer de se reconnecter après le code d'erreur EHOSTUNREACH",
+        "it": "Cerca di riconnettersi dopo il codice di errore EHOSTUNREACH",
+        "es": "Intenta volver a conectarse después del código de error EHOSTUNREACH",
+        "pl": "Próba ponownego połączenia po kodzie błędu EHOSTUNREACH",
+        "uk": "Намагатися від'єднатися після коду помилки EHOSTUNREACH",
+        "zh-cn": "尝试在 EHOSTUNREACH 错误代码后重新连接"
+      },
       "2.0.1": {
         "en": "Corrected error with array comparison\nAdded tests",
         "de": "Fehler behoben mit Array-Vergleich\nZusätzliche Tests",
@@ -80,19 +93,6 @@
         "pl": "Dodano ignorancję komunikatów o potwierdzeniu dla poleceń on / off\nrefaktoring",
         "uk": "Додано ігнорування повідомлень про видачу/вимкнення\nрефакторинг",
         "zh-cn": "对打开/关闭命令的识别消息无知\n正在重构"
-      },
-      "1.2.2": {
-        "en": "Fix js-controller dependency",
-        "de": "Js-controller Abhängigkeit",
-        "ru": "Фикс js-контроллер зависимость",
-        "pt": "Fix js-controller dependência",
-        "nl": "Fix js-controller afhankelijkheid",
-        "fr": "Correction de la dépendance de js-controller",
-        "it": "Fissare la dipendenza da js-controller",
-        "es": "Fijar la dependencia js-controller",
-        "pl": "Popraw zależność kontrolera js-",
-        "uk": "Виправлення залежності js-controller",
-        "zh-cn": "修复js控制器依赖性"
       }
     },
     "titleLang": {
