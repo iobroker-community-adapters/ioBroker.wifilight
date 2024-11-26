@@ -1,8 +1,8 @@
 {
-  "Cannot find any device": "Impossible de trouver un appareil",
-  "Discover devices": "Découvrir les appareils",
-  "IP Address": "Adresse IP",
-  "Type": "Taper",
-  "Port": "Port",
-  "Poll interval (sec)": "Intervalle de sondage (sec)"
+    "Cannot find any device": "Impossible de trouver un appareil",
+    "Discover devices": "Découvrir les appareils",
+    "IP Address": "Adress IP",
+    "Type": "Taper",
+    "Port": "Port",
+    "Poll interval (sec)": "Intervalle de sondage (sec)"
 }
