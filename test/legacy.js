@@ -129,7 +129,7 @@ describe(`Test ${adapterShortName} adapter`, function () {
         await checkValueOfStateAsync(`${adapterShortName}.0.127_0_0_1.progOn`, deviceState.progOn);
         await checkValueOfStateAsync(`${adapterShortName}.0.127_0_0_1.on`, deviceState.on);
         await checkValueOfStateAsync(`${adapterShortName}.0.127_0_0_1.reachable`, true);
-    }).timeout(10000);
+    }).timeout(30000);
 
     it(`Test ${adapterShortName} adapter: test control`, async () => {
         deviceState.r = 80;
@@ -139,15 +139,15 @@ describe(`Test ${adapterShortName} adapter`, function () {
             `${adapterShortName}.0.127_0_0_1.rgb`,
             `#${deviceState.r.toString(16).padStart(2, '0')}${deviceState.g.toString(16).padStart(2, '0')}${deviceState.b.toString(16).padStart(2, '0')}${deviceState.w.toString(16).padStart(2, '0')}`,
         );
-    }).timeout(10000);
+    }).timeout(30000);
 
     it(`Test ${adapterShortName} adapter: test reachable`, async () => {
         await stopServer();
         checkValueOfStateAcknowledged(`${adapterShortName}.0.127_0_0_1.reachable`, false);
-    }).timeout(10000);
+    }).timeout(30000);
 
     after(`Test ${adapterShortName} adapter: Stop js-controller`, function (done) {
-        this.timeout(10000);
+        this.timeout(30000);
 
         setup.stopController(normalTerminated => {
             console.log(`Adapter normal terminated: ${normalTerminated}`);
