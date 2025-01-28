@@ -15,8 +15,11 @@
         "devices": {
             "newLine": true,
             "type": "table",
-            "sm": 12,
             "xs": 12,
+            "sm": 12,
+            "md": 12,
+            "lg": 12,
+            "xl": 12,
             "items": [
                 {
                     "attr": "name",
