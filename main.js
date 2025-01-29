@@ -31,13 +31,22 @@ function savePrevVersion() {
 
     adapter.getForeignObject(vid, (err, obj) => {
         if (err || !obj) {
-            adapter.setForeignObject(vid, {
-                type: 'state',
-                common: { name: 'version', role: 'indicator.state', desc: 'version check for updates', type: 'string' },
-                native: {}
-            }, () => {
-                adapter.setForeignState(vid, { val: adapter.ioPack.common.version, ack: true, from: id });
-            });
+            adapter.setForeignObject(
+                vid,
+                {
+                    type: 'state',
+                    common: {
+                        name: 'version',
+                        role: 'indicator.state',
+                        desc: 'version check for updates',
+                        type: 'string',
+                    },
+                    native: {},
+                },
+                () => {
+                    adapter.setForeignState(vid, { val: adapter.ioPack.common.version, ack: true, from: id });
+                },
+            );
         } else {
             adapter.setForeignState(vid, { val: adapter.ioPack.common.version, ack: true, from: id });
         }
@@ -67,7 +76,7 @@ function checkIfUpdated(callback) {
 
     const id = `system.adapter.${adapter.namespace}`;
     const vid = `${id}.prevVersion`;
-    adapter.getForeignState(vid, (err, state)=>  {
+    adapter.getForeignState(vid, (err, state) => {
         const aktVersion = parseIntVersion(adapter.ioPack.common.version);
         const prevVersion = parseIntVersion(state ? state.val || '0' : '0');
         if (prevVersion < aktVersion) {
@@ -144,7 +153,7 @@ function onMessage(obj) {
                     }
                 });
                 if (found) {
-                    adapter.sendTo(obj.from, obj.command, { native: { devices: _devices }}, obj.callback);
+                    adapter.sendTo(obj.from, obj.command, { native: { devices: _devices } }, obj.callback);
                 } else {
                     adapter.sendTo(obj.from, obj.command, { error: 'Cannot find any device' }, obj.callback);
                 }
@@ -171,23 +180,76 @@ function onUnload(callback) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const usedStateNames = {
-    online:      { n: 'reachable', g: 1, val: false, common: { write: false, type: 'boolean', role: 'indicator.reachable' }},
-    on:          { n: 'on',        g: 3, val: false, common: { type: 'boolean', role: 'switch' }},
-    bri:         { n: 'bri',       g: 3, val: 100,   common: { type: 'number', min: 0, max: 100, unit: '%', desc: '0..100%', role: 'level.dimmer' }},
-    ct:          { n: 'ct',        g: 1, val: 0,     common: { type: 'number', min: 0, max: 5000, unit: '°K', desc: 'temperature in °Kelvin 0..5000', role: 'level.color.temperature' }},
-    red:         { n: 'r',         g: 3, val: 0,     common: { type: 'number', min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: 'level.color.red' }},
-    green:       { n: 'g',         g: 3, val: 0,     common: { type: 'number', min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: 'level.color.green' }},
-    blue:        { n: 'b',         g: 3, val: 0,     common: { type: 'number', min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: 'level.color.blue' }},
-    white:       { n: 'w',         g: 3, val: 0,     common: { type: 'number', min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: 'level.color.white' }},
-    disco:       { n: 'disco',     g: 2, val: 1,     common: { type: 'number', min: 1, max: 9, desc: '1..9' }},
-    progNo:      { n: 'progNo',    g: 1, val: 38,    common: { type: 'number', min: 35, max: 56, desc: '37..56, 97=none' }},
-    progOn:      { n: 'progOn',    g: 1, val: false, common: { type: 'boolean',  desc: 'program on/off' }},
-    progSpeed:   { n: 'progSpeed', g: 3, val: 10,    common: { type: 'number', min: 0, max: 255 }, desc: 'speed for program'},
-    refresh:     { n: 'refresh',   g: 1, val: false, common: { type: 'boolean',  desc: 'read states from device' }},
-    transition:  { n: 'trans',     g: 1, val: 30,    common: { type: 'number', unit: '\u2152 s', desc: 'in 10th seconds'} },
-    command:     { n: 'command',   g: 3, val: 'r:0, g:0, b:0, on:true, transition:30', desc: 'r:0, g:0, b:0, on:true, transition:2' },
-    rgb:         { n: 'rgb',       g: 3, val: '',    common: { type: 'text', desc: '000000..ffffff' , role: 'level.color.rgb' }},
-    onTime:      { n: 'onTime',    g: 3, val: '',    common: {} },
+    online: {
+        n: 'reachable',
+        g: 1,
+        val: false,
+        common: { write: false, type: 'boolean', role: 'indicator.reachable' },
+    },
+    on: { n: 'on', g: 3, val: false, common: { type: 'boolean', role: 'switch' } },
+    bri: {
+        n: 'bri',
+        g: 3,
+        val: 100,
+        common: { type: 'number', min: 0, max: 100, unit: '%', desc: '0..100%', role: 'level.dimmer' },
+    },
+    ct: {
+        n: 'ct',
+        g: 1,
+        val: 0,
+        common: {
+            type: 'number',
+            min: 0,
+            max: 5000,
+            unit: '°K',
+            desc: 'temperature in °Kelvin 0..5000',
+            role: 'level.color.temperature',
+        },
+    },
+    red: {
+        n: 'r',
+        g: 3,
+        val: 0,
+        common: { type: 'number', min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: 'level.color.red' },
+    },
+    green: {
+        n: 'g',
+        g: 3,
+        val: 0,
+        common: { type: 'number', min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: 'level.color.green' },
+    },
+    blue: {
+        n: 'b',
+        g: 3,
+        val: 0,
+        common: { type: 'number', min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: 'level.color.blue' },
+    },
+    white: {
+        n: 'w',
+        g: 3,
+        val: 0,
+        common: { type: 'number', min: 0, max: 255, desc: '0..255 or #rrggbb[ww] (hex)', role: 'level.color.white' },
+    },
+    disco: { n: 'disco', g: 2, val: 1, common: { type: 'number', min: 1, max: 9, desc: '1..9' } },
+    progNo: { n: 'progNo', g: 1, val: 38, common: { type: 'number', min: 35, max: 56, desc: '37..56, 97=none' } },
+    progOn: { n: 'progOn', g: 1, val: false, common: { type: 'boolean', desc: 'program on/off' } },
+    progSpeed: {
+        n: 'progSpeed',
+        g: 3,
+        val: 10,
+        common: { type: 'number', min: 0, max: 255 },
+        desc: 'speed for program',
+    },
+    refresh: { n: 'refresh', g: 1, val: false, common: { type: 'boolean', desc: 'read states from device' } },
+    transition: { n: 'trans', g: 1, val: 30, common: { type: 'number', unit: '\u2152 s', desc: 'in 10th seconds' } },
+    command: {
+        n: 'command',
+        g: 3,
+        val: 'r:0, g:0, b:0, on:true, transition:30',
+        desc: 'r:0, g:0, b:0, on:true, transition:2',
+    },
+    rgb: { n: 'rgb', g: 3, val: '', common: { type: 'text', desc: '000000..ffffff', role: 'level.color.rgb' } },
+    onTime: { n: 'onTime', g: 3, val: '', common: {} },
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -195,14 +257,16 @@ const usedStateNames = {
 function parseHexColors(val) {
     val = val.toString();
     const ar = val.split('.');
-    if (ar && ar.length > 1) val = ar[0];
+    if (ar && ar.length > 1) {
+        val = ar[0];
+    }
     if (val[0] === '#') {
         val = val.substr(1);
     }
     const co = {
         r: parseInt(val.substr(0, 2), 16),
         g: parseInt(val.substr(2, 2), 16) || 0,
-        b: parseInt(val.substr(4, 2), 16) || 0 //,
+        b: parseInt(val.substr(4, 2), 16) || 0, //,
     };
     if (val.length > 7) {
         co.w = parseInt(val.substr(6, 2), 16);
@@ -247,7 +311,7 @@ function startAdapter() {
         objectChange: (id, obj) => id && !obj && devices?.removeWithoutNameSpace(id),
         ready: () => checkIfUpdated(() => devices.init(adapter, () => main())),
         stateChange: (id, state) => onStateChange(id, state),
-        unload: (callback) => onUnload(callback),
+        unload: callback => onUnload(callback),
     });
 
     return adapter;
@@ -327,7 +391,7 @@ class WifiLight {
             if ((j === 'progNo' || j === 'disco') && this.cmds.programNames) {
                 st.common.states = this.cmds.programNames;
             }
-            // eslint-disable-next-line no-bitwise
+
             if (st.g & this.cmds.g) {
                 this.dev.createNew(st.n, st);
             }
@@ -464,7 +528,13 @@ class WifiLight {
                 if (o['on'] !== undefined) {
                     this.on_off(channel, !!(o.on >> 0));
                 }
-                if (colors.r !== undefined || colors.g !== undefined || colors.b !== undefined || colors.w !== undefined || colors.sat !== undefined) {
+                if (
+                    colors.r !== undefined ||
+                    colors.g !== undefined ||
+                    colors.b !== undefined ||
+                    colors.w !== undefined ||
+                    colors.sat !== undefined
+                ) {
                     this.fade(channel, o, transitionTime);
                 }
                 if (o['ct'] !== undefined) {
@@ -488,8 +558,9 @@ class WifiLight {
 
     runJsonProgram(channel, cmds) {
         let i = -1;
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         const self = this;
-        const lastCo = {red: self.states.red, green: self.states.green, blue: self.states.blue};
+        const lastCo = { red: self.states.red, green: self.states.green, blue: self.states.blue };
         this.prgTimer.clear();
         self.clearQueue();
 
@@ -540,10 +611,15 @@ class WifiLight {
 
         this.destroyClient();
 
-        this.reconnectTimeout = this.reconnectTimeout || setTimeout(() => {
-            this.reconnectTimeout = null;
-            this.start(cb);
-        }, timeout === undefined ? 5000 : timeout);
+        this.reconnectTimeout =
+            this.reconnectTimeout ||
+            setTimeout(
+                () => {
+                    this.reconnectTimeout = null;
+                    this.start(cb);
+                },
+                timeout === undefined ? 5000 : timeout,
+            );
     }
 
     _write(data, cb) {
@@ -572,11 +648,15 @@ class WifiLight {
                 case 'ETIMEDOUT':
                 case 'EHOSTUNREACH':
                 case 'EPIPE':
-                    adapter.log.warn(`[${this.config.ip}] onError: ${error.code} ${error.message} - reconnecting in 5 sec...`);
+                    adapter.log.warn(
+                        `[${this.config.ip}] onError: ${error.code} ${error.message} - reconnecting in 5 sec...`,
+                    );
                     this.reconnect(5000);
                     break;
                 default:
-                    adapter.log.error(`[${this.config.ip}] onError: ${error.code} ${error.message} - will not be reconnected`);
+                    adapter.log.error(
+                        `[${this.config.ip}] onError: ${error.code} ${error.message} - will not be reconnected`,
+                    );
                     break;
             }
             this.setOnline(false);
@@ -648,8 +728,7 @@ class WifiLight {
         });
         this.client.on('error', (/* error */) => this.destroyClient());
 
-        this.client.connect(this.config.port, this.config.ip, () =>
-            this.client.write(data, cb));
+        this.client.connect(this.config.port, this.config.ip, () => this.client.write(data, cb));
     }
 
     get(channel, state) {
@@ -677,14 +756,13 @@ class WifiLight {
         this.refresh();
 
         if (this.config.pollIntervall > 0) {
-            this.updateTimer = setTimeout(() => this.runUpdateTimer(),
-                this.config.pollIntervall * 1000);
+            this.updateTimer = setTimeout(() => this.runUpdateTimer(), this.config.pollIntervall * 1000);
         }
     }
 
     setOnline(val) {
         this.isOnline = val;
-        // eslint-disable-next-line no-bitwise
+
         if (!(this.cmds.g & usedStateNames.online.g)) {
             return;
         }
@@ -716,7 +794,7 @@ class WifiLight {
                 buf[i] = cmd[i];
                 sum += buf[i];
             }
-            buf[buf.length - 1] = sum & 0xFF;
+            buf[buf.length - 1] = sum & 0xff;
         } else {
             buf = Buffer.from(cmd);
         }
@@ -749,7 +827,12 @@ class WifiLight {
         let j = idx + 1;
         if (args.length > j) {
             for (let i = 0; i < args[idx].length; i++) {
-                cmd[i] = args[idx][i] < 0 && args[idx][i] !== commands.VARS.separator && args[idx][i] !== commands.VARS.sepNoDelay ? args[j++] : args[idx][i];
+                cmd[i] =
+                    args[idx][i] < 0 &&
+                    args[idx][i] !== commands.VARS.separator &&
+                    args[idx][i] !== commands.VARS.sepNoDelay
+                        ? args[j++]
+                        : args[idx][i];
             }
         } else {
             cmd = args[idx];
@@ -778,7 +861,14 @@ class WifiLight {
                     cmd: _cmd,
                     ctrl: !!opt?.ctrl,
                     channel: channel,
-                    delay: sep & 2 ? 0 : opt && opt.delay !== undefined ? opt.delay : this.cmds.delay !== undefined ? this.cmds.delay : 10,
+                    delay:
+                        sep & 2
+                            ? 0
+                            : opt && opt.delay !== undefined
+                              ? opt.delay
+                              : this.cmds.delay !== undefined
+                                ? this.cmds.delay
+                                : 10,
                     ts: 0,
                     inProcess: 0,
                 });
@@ -807,10 +897,9 @@ class WifiLight {
                 this.directRefresh(akt.channel);
             }
             this.queue.shift();
-        } while(this.queue.length);
+        } while (this.queue.length);
 
-        this.write(akt.channel, akt.cmd, () =>
-            this.writeTimeout = setTimeout(() => this.exec(), akt.delay));
+        this.write(akt.channel, akt.cmd, () => (this.writeTimeout = setTimeout(() => this.exec(), akt.delay)));
 
         akt.inProcess = 1;
     }
@@ -849,7 +938,7 @@ class WifiLight {
         dif.w /= maxSteps;
 
         const steps = maxSteps;
-        const delay = Math.round(transitionTime * 100 / maxSteps);
+        const delay = Math.round((transitionTime * 100) / maxSteps);
 
         for (let i = 0; i < steps; i++) {
             co.r += dif.r;
@@ -863,9 +952,9 @@ class WifiLight {
     }
 
     color(channel, rgbw, opt) {
-        rgbw.w === undefined ?
-            this.addToQueue(channel, this.cmds.rgb, rgbw.r, rgbw.g, rgbw.b, opt) :
-            this.addToQueue(channel, this.cmds.rgbw, rgbw.r, rgbw.g, rgbw.b, rgbw.w, opt);
+        rgbw.w === undefined
+            ? this.addToQueue(channel, this.cmds.rgb, rgbw.r, rgbw.g, rgbw.b, opt)
+            : this.addToQueue(channel, this.cmds.rgbw, rgbw.r, rgbw.g, rgbw.b, rgbw.w, opt);
     }
 
     ct(channel, temp, transitionTime) {
@@ -926,7 +1015,7 @@ class WifiLight {
             const b = new Uint8Array(newPos + 200);
             //const b = new Buffer(newPos + 200);
             for (let i = 0; i < this.dataBuffer.pos; i++) {
-                b [i] = this.dataBuffer[i];
+                b[i] = this.dataBuffer[i];
             }
             b.pos = this.dataBuffer.pos;
             this.dataBuffer = b;
@@ -988,7 +1077,7 @@ class MiLight extends WifiLight {
         if (!this.client) {
             const dgram = require('node:dgram');
             this.client = dgram.createSocket('udp4');
-            this.client.on('listening', (error) => {
+            this.client.on('listening', error => {
                 if (error) {
                     return cb && cb(error);
                 }
@@ -1019,7 +1108,7 @@ class MiLight extends WifiLight {
 
     color(channel, rgbw /* , opt */) {
         if (rgbw.w !== undefined) {
-            this.addToQueue(channel, this.cmds._white((rgbw.w * 100 / 255) >> 0));
+            this.addToQueue(channel, this.cmds._white(((rgbw.w * 100) / 255) >> 0));
             return;
         }
         const hsv = rgb2hsv(rgbw);
@@ -1027,7 +1116,7 @@ class MiLight extends WifiLight {
             this.on_off(channel, false);
             return;
         }
-        const color = (256 + 176 - Math.floor(Number(hsv.h) / 360.0 * 255.0)) % 256;
+        const color = (256 + 176 - Math.floor((Number(hsv.h) / 360.0) * 255.0)) % 256;
 
         this.addToQueue(channel, this.cmds.on);
         this.addToQueue(channel, this.cmds._color(color));
@@ -1105,11 +1194,13 @@ async function normalizeConfig(config) {
         const c = commands[d.type];
         if (!c) {
             let err = `config.device.type "${d.type}" (${d.name}) is not a known device type. Skipping this device!`;
-            if (!types.length) Object.keys(commands).forEach(n => {
-                if (typeof commands[n] === 'object' && commands[n].on) {
-                    types.push(n);
-                }
-            });
+            if (!types.length) {
+                Object.keys(commands).forEach(n => {
+                    if (typeof commands[n] === 'object' && commands[n].on) {
+                        types.push(n);
+                    }
+                });
+            }
             err += `\nKnown types are: ${types.join(', ')}`;
             adapter.log.error(err);
             return;
@@ -1126,11 +1217,10 @@ async function normalizeConfig(config) {
         }
 
         d.port = parseInt(d.port) || (c && c.port ? c.port : dev && dev.port ? dev.port : 5577);
-        Object.keys(d).forEach(key =>
-            changed = changed || d[key] !== old[key]);
+        Object.keys(d).forEach(key => (changed = changed || d[key] !== old[key]));
     });
     if (changed) {
-        await changeAdapterConfig(adapter, conf => conf.devices = config.devices);
+        await changeAdapterConfig(adapter, conf => (conf.devices = config.devices));
     }
 }
 
