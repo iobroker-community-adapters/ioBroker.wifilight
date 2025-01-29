@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "2.0.2",
+    "version": "2.0.3-alpha.0",
     "news": {
+      "2.0.3-alpha.0": {
+        "en": "Trying to reconnect after the EHOSTUNREACH error code\nDependencies have been updated",
+        "de": "Versuchen, nach dem EHOSTUNREACH-Fehlercode wiederzuschalten\nAbhängigkeiten wurden aktualisiert",
+        "ru": "Попытка повторного подключения после кода ошибки EHOSTUNREACH\nЗависимость обновлена",
+        "pt": "Tentando se reconectar após o código de erro EHOSTUNREACH\nAs dependências foram atualizadas",
+        "nl": "Proberen opnieuw verbinding na de EHOSTUNREACH foutcode\nAfhankelijkheden zijn bijgewerkt",
+        "fr": "Essayer de se reconnecter après le code d'erreur EHOSTUNREACH\nLes dépendances ont été actualisées",
+        "it": "Cerca di riconnettersi dopo il codice di errore EHOSTUNREACH\nLe dipendenze sono state aggiornate",
+        "es": "Intenta volver a conectarse después del código de error EHOSTUNREACH\nSe han actualizado las dependencias",
+        "pl": "Próba ponownego połączenia po kodzie błędu EHOSTUNREACH\nZaktualizowano zależności",
+        "uk": "Намагатися від'єднатися після коду помилки EHOSTUNREACH\nЗалежність було оновлено",
+        "zh-cn": "尝试在 EHOSTUNREACH 错误代码后重新连接\n依赖关系已更新"
+      },
       "2.0.2": {
         "en": "Trying to reconnect after the EHOSTUNREACH error code",
         "de": "Versuchen, nach dem EHOSTUNREACH-Fehlercode wiederzuschalten",
@@ -80,19 +93,6 @@
         "pl": "sekcja plików została naprawiona",
         "uk": "розділ файлів було виправлено",
         "zh-cn": "文件区域已固定"
-      },
-      "1.3.1": {
-        "en": "Added ignorance of acknowledgement messages for on/off commands\nrefactoring",
-        "de": "Unwissenheit von Quittungsnachrichten für on/off-Befehle hinzugefügt\nrefaktor",
-        "ru": "Добавлено невежество в отношении сообщений о признании для команд on/off\nрефакторинг",
-        "pt": "Adicionado ignorância de mensagens de reconhecimento para comandos on/off\nrefactoring",
-        "nl": "Toegevoegd onwetendheid van bevestigingsberichten voor aan/uit commando's\nrefactoring",
-        "fr": "Ajout de l'ignorance des messages de reconnaissance pour les commandes on/off\nrefactoration",
-        "it": "Aggiunta ignoranza dei messaggi di riconoscimento per i comandi on/off\nrefactoring",
-        "es": "Añadido ignorancia de los mensajes de reconocimiento para comandos on/off\nrefactoring",
-        "pl": "Dodano ignorancję komunikatów o potwierdzeniu dla poleceń on / off\nrefaktoring",
-        "uk": "Додано ігнорування повідомлень про видачу/вимкнення\nрефакторинг",
-        "zh-cn": "对打开/关闭命令的识别消息无知\n正在重构"
       }
     },
     "titleLang": {
