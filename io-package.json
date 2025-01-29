@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "wifilight",
-    "version": "2.0.3-alpha.0",
+    "version": "2.0.3",
     "news": {
-      "2.0.3-alpha.0": {
+      "2.0.3": {
         "en": "Trying to reconnect after the EHOSTUNREACH error code\nDependencies have been updated",
         "de": "Versuchen, nach dem EHOSTUNREACH-Fehlercode wiederzuschalten\nAbhängigkeiten wurden aktualisiert",
         "ru": "Попытка повторного подключения после кода ошибки EHOSTUNREACH\nЗависимость обновлена",
@@ -15,19 +15,6 @@
         "pl": "Próba ponownego połączenia po kodzie błędu EHOSTUNREACH\nZaktualizowano zależności",
         "uk": "Намагатися від'єднатися після коду помилки EHOSTUNREACH\nЗалежність було оновлено",
         "zh-cn": "尝试在 EHOSTUNREACH 错误代码后重新连接\n依赖关系已更新"
-      },
-      "2.0.2": {
-        "en": "Trying to reconnect after the EHOSTUNREACH error code",
-        "de": "Versuchen, nach dem EHOSTUNREACH-Fehlercode wiederzuschalten",
-        "ru": "Попытка повторного подключения после кода ошибки EHOSTUNREACH",
-        "pt": "Tentando se reconectar após o código de erro EHOSTUNREACH",
-        "nl": "Proberen opnieuw verbinding na de EHOSTUNREACH foutcode",
-        "fr": "Essayer de se reconnecter après le code d'erreur EHOSTUNREACH",
-        "it": "Cerca di riconnettersi dopo il codice di errore EHOSTUNREACH",
-        "es": "Intenta volver a conectarse después del código de error EHOSTUNREACH",
-        "pl": "Próba ponownego połączenia po kodzie błędu EHOSTUNREACH",
-        "uk": "Намагатися від'єднатися після коду помилки EHOSTUNREACH",
-        "zh-cn": "尝试在 EHOSTUNREACH 错误代码后重新连接"
       },
       "2.0.1": {
         "en": "Corrected error with array comparison\nAdded tests",
@@ -80,19 +67,6 @@
         "pl": "Po prostu zmieniłem nazwę kilku funkcji",
         "uk": "Просто перейменуйте деякі функції",
         "zh-cn": "刚刚重新命名了一些功能"
-      },
-      "1.3.2": {
-        "en": "files section has been fixed",
-        "de": "dateien abschnitt wurde behoben",
-        "ru": "раздел файлов был исправлен",
-        "pt": "seção de arquivos foi corrigido",
-        "nl": "bestandssectie is hersteld",
-        "fr": "la section fichiers a été corrigée",
-        "it": "la sezione file è stata fissata",
-        "es": "sección de archivos ha sido fijo",
-        "pl": "sekcja plików została naprawiona",
-        "uk": "розділ файлів було виправлено",
-        "zh-cn": "文件区域已固定"
       }
     },
     "titleLang": {
