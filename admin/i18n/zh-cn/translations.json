@@ -1,8 +1,8 @@
 {
-  "Cannot find any device": "找不到任何设备",
-  "Discover devices": "发现设备",
-  "IP Address": "IP 地址",
-  "Type": "类型",
-  "Port": "港口",
-  "Poll interval (sec)": "轮询间隔（秒）"
+    "Cannot find any device": "找不到任何设备",
+    "Discover devices": "发现设备",
+    "IP Address": "IP 地址",
+    "Type": "类型",
+    "Port": "港口",
+    "Poll interval (sec)": "轮询间隔（秒）"
 }
