@@ -1,8 +1,8 @@
 {
-  "Cannot find any device": "No se puede encontrar ningún dispositivo",
-  "Discover devices": "Descubrir dispositivos",
-  "IP Address": "Dirección IP",
-  "Type": "Tipo",
-  "Port": "Puerto",
-  "Poll interval (sec)": "Intervalo de sondeo (seg)"
+    "Cannot find any device": "No se puede encontrar ningún dispositivo",
+    "Discover devices": "Descubrir dispositivos",
+    "IP Address": "Dirección IP",
+    "Type": "Tipo",
+    "Port": "Puerto",
+    "Poll interval (sec)": "Intervalo de sondeo (seg)"
 }
