@@ -1,8 +1,8 @@
 {
-  "Cannot find any device": "Не вдається знайти жодного пристрою",
-  "Discover devices": "Відкрийте пристрої",
-  "IP Address": "IP-адреса",
-  "Poll interval (sec)": "Інтервал опитування (с)",
-  "Port": "Порт",
-  "Type": "Тип"
+    "Cannot find any device": "Не вдається знайти жодного пристрою",
+    "Discover devices": "Відкрийте пристрої",
+    "IP Address": "IP-адреса",
+    "Poll interval (sec)": "Інтервал опитування (с)",
+    "Port": "Порт",
+    "Type": "Тип"
 }
