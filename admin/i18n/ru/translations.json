@@ -1,8 +1,8 @@
 {
-  "Cannot find any device": "Не удалось найти ни одно устройство.",
-  "Discover devices": "Откройте для себя устройства",
-  "IP Address": "IP-адрес",
-  "Type": "Тип",
-  "Port": "Порт",
-  "Poll interval (sec)": "Интервал опроса (сек)"
+    "Cannot find any device": "Не удалось найти ни одно устройство.",
+    "Discover devices": "Откройте для себя устройства",
+    "IP Address": "IP-адрес",
+    "Type": "Тип",
+    "Port": "Порт",
+    "Poll interval (sec)": "Интервал опроса (сек)"
 }

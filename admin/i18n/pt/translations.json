@@ -1,8 +1,8 @@
 {
-  "Cannot find any device": "Não é possível encontrar nenhum dispositivo",
-  "Discover devices": "Descobrir dispositivos",
-  "IP Address": "Endereço IP",
-  "Type": "Tipo",
-  "Port": "Porta",
-  "Poll interval (sec)": "Intervalo de pesquisa (seg)"
+    "Cannot find any device": "Não é possível encontrar nenhum dispositivo",
+    "Discover devices": "Descobrir dispositivos",
+    "IP Address": "Endereço IP",
+    "Type": "Tipo",
+    "Port": "Porta",
+    "Poll interval (sec)": "Intervalo de pesquisa (seg)"
 }
