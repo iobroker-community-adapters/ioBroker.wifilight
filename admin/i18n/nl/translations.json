@@ -1,8 +1,8 @@
 {
-  "Cannot find any device": "Kan geen enkel apparaat vinden",
-  "Discover devices": "Ontdek apparaten",
-  "IP Address": "IP-adres",
-  "Type": "Type",
-  "Port": "Haven",
-  "Poll interval (sec)": "Poll-interval (sec)"
+    "Cannot find any device": "Kan geen enkel apparaat vinden",
+    "Discover devices": "Ontdek apparaten",
+    "IP Address": "IP-adres",
+    "Type": "Type",
+    "Port": "Haven",
+    "Poll interval (sec)": "Poll-interval (sec)"
 }
