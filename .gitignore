@@ -5,3 +5,6 @@
 /nbproject
 /tmp/
 *.tgz
+
+#ignore .commitinfo created by ioBroker release script
+.commitinfo
