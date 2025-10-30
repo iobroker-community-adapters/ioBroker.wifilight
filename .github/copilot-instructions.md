@@ -1172,5 +1172,3 @@ async updateDeviceState(deviceId, newState) {
 ```
 
 This configuration provides GitHub Copilot with comprehensive context about the WiFi Light adapter's architecture, testing patterns, and development best practices specific to both ioBroker adapters and WiFi lighting device control.
-
-This configuration provides GitHub Copilot with comprehensive context about the WiFi Light adapter's architecture, testing patterns, and development best practices specific to both ioBroker adapters and WiFi lighting device control.
