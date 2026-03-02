@@ -1,6 +1,6 @@
 # ioBroker Adapter Development with GitHub Copilot
 
-**Version:** 0.5.6
+**Version:** 0.5.7
 **Template Source:** https://github.com/DrozmotiX/ioBroker-Copilot-Instructions
 
 This file contains instructions and best practices for GitHub Copilot when working on ioBroker adapter development.
@@ -475,10 +475,9 @@ Use JSON-Config format for modern ioBroker admin interfaces.
 
 1. Make your changes to labels/help texts
 2. Run automatic translation: `npm run translate`
-3. Validate translations:
+3. Create validation script (`scripts/validate-translations.js`):
 
 ```javascript
-// scripts/validate-translations.js
 const fs = require('fs');
 const path = require('path');
 const jsonConfig = JSON.parse(fs.readFileSync('admin/jsonConfig.json', 'utf8'));
@@ -507,9 +506,17 @@ languages.forEach(lang => {
     const orphaned = Array.from(translationKeys).filter(key => !requiredTexts.has(key));
     
     console.log(`\n=== ${lang} ===`);
-    if (missing.length > 0) { console.error('❌ Missing keys:', missing); hasErrors = true; }
-    if (orphaned.length > 0) { console.error('❌ Orphaned keys (REMOVE THESE):', orphaned); hasErrors = true; }
-    if (missing.length === 0 && orphaned.length === 0) { console.log('✅ All keys match!'); }
+    if (missing.length > 0) {
+        console.error('❌ Missing keys:', missing);
+        hasErrors = true;
+    }
+    if (orphaned.length > 0) {
+        console.error('❌ Orphaned keys (REMOVE THESE):', orphaned);
+        hasErrors = true;
+    }
+    if (missing.length === 0 && orphaned.length === 0) {
+        console.log('✅ All keys match!');
+    }
 });
 
 process.exit(hasErrors ? 1 : 0);
@@ -517,7 +524,20 @@ process.exit(hasErrors ? 1 : 0);
 
 4. Run validation: `node scripts/validate-translations.js`
 5. Remove orphaned keys manually from all translation files
-6. Run: `npm run lint && npm run test`
+6. Add missing translations in native languages
+7. Run: `npm run lint && npm run test`
+
+#### Add Validation to package.json
+
+```json
+{
+  "scripts": {
+    "translate": "translate-adapter",
+    "validate:translations": "node scripts/validate-translations.js",
+    "pretest": "npm run lint && npm run validate:translations"
+  }
+}
+```
 
 #### Translation Checklist
 
@@ -528,6 +548,7 @@ Before committing changes to admin UI or translations:
 4. ✅ Keys alphabetically sorted
 5. ✅ `npm run lint` passes
 6. ✅ `npm run test` passes
+7. ✅ Admin UI displays correctly
 
 ---
 
@@ -619,6 +640,7 @@ Initial release
 - **Node.js versions:** Test on 20.x, 22.x, 24.x
 - **Platform:** Use ubuntu-22.04
 - **Automated releases:** Deploy to npm on version tags (requires NPM Trusted Publishing)
+- **Monitoring:** Include Sentry release tracking for error monitoring
 
 #### Critical: Lint-First Validation Workflow
 
@@ -626,6 +648,7 @@ Initial release
 - Catches code quality issues immediately
 - Prevents wasting CI resources on tests that would fail due to linting errors
 - Provides faster feedback to developers
+- Enforces consistent code quality
 
 **Workflow Dependency Configuration:**
 ```yaml
@@ -636,6 +659,7 @@ jobs:
     
   adapter-tests:
     needs: [check-and-lint]  # Wait for linting to pass
+    # Run adapter unit tests
     
   integration-tests:
     needs: [check-and-lint, adapter-tests]  # Wait for both
@@ -645,6 +669,7 @@ jobs:
 - The `check-and-lint` job has NO dependencies - runs first
 - ALL other test jobs MUST list `check-and-lint` in their `needs` array
 - If linting fails, no other tests run, saving time
+- Fix all ESLint errors before proceeding
 
 ### Testing Integration
 
